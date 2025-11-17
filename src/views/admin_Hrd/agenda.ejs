@@ -1,0 +1,214 @@
+<%- include('partials/header') %>
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <%- include('partials/navbar') %>
+
+      <!-- ================== MAIN PANEL ================== -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="container-fluid">
+
+            <!-- ================== TITLE ================== -->
+            <div class="card shadow-sm mb-4 border-0">
+              <div class="card-body bg-white rounded-4">
+                <div class="row mb-3 align-items-center">
+                  <div class="col-lg-6 col-md-12">
+                    <h3 class="mb-2">
+                      <i class="bi bi-calendar-event me-2"></i> Agenda Kunjungan Kerja
+                    </h3>
+                    <p class="text-muted mb-2">Laporan terkait kunjungan tamu ataupun kegiatan dinas</p>
+                  </div>
+                  <div class="col-lg-6 text-lg-end text-md-start mt-3 mt-lg-0">
+                    <span class="badge bg-light text-dark px-3 py-2 shadow-sm">
+                      <i class="bi bi-calendar3 me-1"></i>
+                      <span id="currentDate"></span>
+                    </span>
+                  </div>
+                </div>
+
+                <hr>
+
+                <!-- ================== FILTER & TOOLS ================== -->
+                <div class="row g-3 mb-3 align-items-end">
+                  <div class="col-md-3">
+                    <label class="form-label mb-1">Dari Tanggal</label>
+                    <input type="date" id="fromDate" class="form-control">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label mb-1">Sampai Tanggal</label>
+                    <input type="date" id="toDate" class="form-control">
+                  </div>
+                  <div class="col-md-3">
+                    <label class="form-label mb-1">Pencarian</label>
+                    <div class="input-group">
+                      <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
+                      <input type="text" id="searchInput" class="form-control" placeholder="Cari instansi atau penanggung jawab...">
+                    </div>
+                  </div>
+                  <div class="col-md-3 d-flex gap-2">
+                    <button id="btnFilter" class="btn btn-primary w-50" style="background-color: #0d6efd;">
+                      <i class="bi bi-funnel"></i> Filter
+                    </button>
+                    <button id="btnReset" class="btn btn-secondary w-50">
+                      <i class="bi bi-arrow-repeat"></i> Reset
+                    </button>
+                  </div>
+                </div>
+
+                <!-- ================== TABLE ================== -->
+                <div id="printArea" class="table-responsive">
+                  <table id="agendaTable" class="table table-hover text-center mb-0">
+                    <thead class="table-light">
+                      <tr>
+                        <th>No</th>
+                        <th>Instansi</th>
+                        <th>Tujuan</th>
+                        <th>Tanggal</th>
+                        <th>Jam</th>
+                        <th>Penanggung Jawab</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                      <tr>
+                        <td>1</td>
+                        <td>Dinas Lingkungan Hidup Tanggerang Selatan</td>
+                        <td><span class="badge bg-primary" style="background-color: #0d6efd;">Kunjungan Dinas</span></td>
+                        <td>04-11-2025</td>
+                        <td>08:00</td>
+                        <td>Hermawan, S.T</td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Kementerian PUPR</td>
+                        <td><span class="badge bg-primary" style="background-color: #0d6efd;">Koordinasi Lapangan</span></td>
+                        <td>05-11-2025</td>
+                        <td>09:15</td>
+                        <td>Meimas Merita Nazara</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <!-- ================== NO DATA MESSAGE ================== -->
+                <div id="noDataMessage" class="alert alert-warning text-center fw-semibold mt-3 d-none" role="alert">
+                  <i class="bi bi-exclamation-triangle me-2"></i> Tidak ada data kunjungan kerja ditemukan.
+                </div>
+
+                <!-- ================== FOOTER TOOLS ================== -->
+                <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-3">
+                  <div class="text-muted small">
+                    <i class="bi bi-info-circle me-1"></i>Data diisi oleh admin melalui aplikasi mobile.
+                  </div>
+                  <div class="d-flex gap-2">
+                    <button class="btn btn-success btn-sm shadow-sm" id="btnDownloadExcel">
+                      <i class="bi bi-file-earmark-excel me-1"></i> Excel
+                    </button>
+                  </div>
+                </div>
+
+                <!-- ================== PAGINATION ================== -->
+                <nav class="mt-4" aria-label="Pagination data">
+                  <ul class="pagination justify-content-end mb-0">
+                    <li class="page-item disabled"><a class="page-link">Sebelumnya</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Selanjutnya</a></li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+<%- include('partials/footer') %>
+
+<!-- ================== SCRIPT ================== -->
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+<script>
+  // ======== TANGGAL SAAT INI ========
+  document.getElementById("currentDate").textContent = new Date().toLocaleDateString("id-ID", {
+    day: "2-digit", month: "long", year: "numeric"
+  });
+
+  // ======== FILTER DATA ========
+  const searchInput = document.getElementById("searchInput");
+  const fromDate = document.getElementById("fromDate");
+  const toDate = document.getElementById("toDate");
+  const btnFilter = document.getElementById("btnFilter");
+  const btnReset = document.getElementById("btnReset");
+  const rows = document.querySelectorAll("#tableBody tr");
+  const noDataMessage = document.getElementById("noDataMessage");
+
+  function filterData() {
+    const keyword = searchInput.value.toLowerCase();
+    const start = fromDate.value ? new Date(fromDate.value) : null;
+    const end = toDate.value ? new Date(toDate.value) : null;
+    let visibleCount = 0;
+
+    rows.forEach(row => {
+      const text = row.textContent.toLowerCase();
+      const dateText = row.querySelector("td:nth-child(4)").textContent;
+      const date = new Date(dateText.split("-").reverse().join("-"));
+      const matchKeyword = text.includes(keyword);
+      const matchDate = (!start || date >= start) && (!end || date <= end);
+
+      if (matchKeyword && matchDate) {
+        row.style.display = "";
+        visibleCount++;
+      } else {
+        row.style.display = "none";
+      }
+    });
+
+    noDataMessage.classList.toggle("d-none", visibleCount > 0);
+  }
+
+  btnFilter.addEventListener("click", filterData);
+  btnReset.addEventListener("click", () => {
+    searchInput.value = "";
+    fromDate.value = "";
+    toDate.value = "";
+    rows.forEach(r => r.style.display = "");
+    noDataMessage.classList.add("d-none");
+  });
+
+  // ======== DOWNLOAD EXCEL PROFESIONAL ========
+  document.getElementById("btnDownloadExcel").addEventListener("click", () => {
+    const table = document.getElementById("agendaTable");
+    const wb = XLSX.utils.book_new();
+
+    // Ambil data dari tabel
+    const ws = XLSX.utils.table_to_sheet(table, { raw: true });
+
+    // Tambahkan judul di atas tabel
+    XLSX.utils.sheet_add_aoa(ws, [
+      ["AGENDA KUNJUNGAN KERJA"],
+      ["Tanggal Cetak:", new Date().toLocaleDateString("id-ID")]
+    ], { origin: "A1" });
+
+    // Gaya header (bold + background)
+    const range = XLSX.utils.decode_range(ws["!ref"]);
+    for (let C = range.s.c; C <= range.e.c; ++C) {
+      const cellAddress = XLSX.utils.encode_cell({ r: 3, c: C });
+      if (!ws[cellAddress]) continue;
+      ws[cellAddress].s = {
+        font: { bold: true, color: { rgb: "FFFFFF" } },
+        fill: { fgColor: { rgb: "4472C4" } },
+        alignment: { horizontal: "center" },
+        border: {
+          top: { style: "thin", color: { auto: 1 } },
+          left: { style: "thin", color: { auto: 1 } },
+          bottom: { style: "thin", color: { auto: 1 } },
+          right: { style: "thin", color: { auto: 1 } }
+        }
+      };
+    }
+
+    XLSX.utils.book_append_sheet(wb, ws, "Agenda Kunjungan");
+    XLSX.writeFile(wb, "Agenda_Kunjungan_Kerja.xlsx");
+  });
+</script>

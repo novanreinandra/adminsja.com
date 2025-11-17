@@ -1,0 +1,205 @@
+  <body class="sidebar-icon-only">
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center" style="background-color:  #3c3c51">
+         <a href="/" class="navbar-brand brand-logo text-white">HRD | SJA</a>
+         <a class="navbar-brand brand-logo-mini" href="/admin_Hrd/dashboard">
+           <i class="bi bi-person-badge-fill text-white"></i>
+         </a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <!--<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>-->
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <!--<div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder=" Cari.." aria-label="search" aria-describedby="search">
+            </div>-->
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+         <!-- Notifikasi Dropdown -->
+          <li class="nav-item dropdown d-flex">
+            <!-- Tombol Icon Notifikasi -->
+            <a 
+            class="nav-link count-indicator dropdown-toggle d-flex justify-content-center align-items-center" 
+            id="messageDropdown" 
+            href="#" 
+            data-toggle="dropdown" 
+            aria-expanded="false"
+          >
+            <i class="mdi mdi-bell-outline mx-0"></i>
+          </a>
+
+            <!-- Dropdown Notifikasi -->
+           <!-- Dropdown Notifikasi -->
+            <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list shadow rounded" aria-labelledby="messageDropdown" style="min-width: 320px;">
+              <p class="mb-2 fw-bold text-dark px-3 pt-3">Notifikasi</p>
+               <!-- Garis pemisah -->
+              <div class="dropdown-divider"></div>
+              <!-- Notifikasi Item -->
+              <a href="/admin_Hrd/rekrutmen" class="dropdown-item d-flex align-items-start px-3 py-2">
+                <!-- Ikon -->
+                <div class="me-3">
+                  <i class="mdi mdi-check-circle-outline text-success fs-4"></i>
+                </div>
+
+                <!-- Isi Notifikasi -->
+                <div class="flex-grow-1 text-wrap">
+                  <div class="fw-semibold mb-1">
+                    1 kandidat baru terdaftar
+                  </div>
+                  <div class="text-muted small">
+                    Segera jadwalkan interview dan persiapkan dokumen pendukung.
+                  </div>
+                </div>
+              </a>
+
+              <!-- Bisa tambahkan notifikasi lain di sini -->
+
+            </div>
+
+          </li>
+
+          <li class="nav-item dropdown d-flex mr-4 ">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-cog"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
+              <a class="dropdown-item preview-item">               
+                  <i class="icon-head"></i> Profile
+              </a>
+              <a href="/admin_Hrd/login" class="dropdown-item preview-item">
+                  <i class="icon-inbox"></i> Logout
+              </a>
+            </div>
+          </li>
+         
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar" style="background-color:  #3c3c51">
+        <div class="user-profile">
+          <div class="user-image">
+            <img src="/images/logo-sja.png">
+          </div>
+          <div class="user-name">
+              Senang Jaya
+          </div>
+          <div class="user-designation">
+              Abadi
+          </div>
+        </div>
+       <ul class="nav">
+        <!-- Dashboard -->
+        <li class="nav-item text-white">
+          <a class="nav-link" href="/admin_Hrd/dashboard">
+            <i class="icon-box menu-icon"></i>
+            <span class="menu-title">Dashboard</span>
+          </a>
+        </li>
+
+        <!-- Company -->
+        <li class="nav-item text-white">
+          <a class="nav-link text-white" href="/admin_Hrd/company">
+           <i class="bi bi-building-fill me-2"></i> 
+            <span class="menu-title">Perusahaan & Dept</span>
+          </a>
+        </li>
+
+        <!-- Modul Karyawan -->
+        <li class="nav-item">
+          <a class="nav-link collapsed" data-bs-toggle="collapse" href="#karyawan" aria-expanded="false" aria-controls="karyawan">
+            <i class="bi bi-people-fill me-2 text-white"></i>
+            <span class="menu-title text-white">Karyawan</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse text-white" id="karyawan">
+            <ul class="nav flex-column ms-3">
+              <!-- Data KAryawan -->
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/admin_Hrd/data_karyawan">
+                  <i class="bi bi-person-lines-fill me-2"></i> Data Karyawan
+                </a>
+              </li>
+              <!-- Absensi -->
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/admin_Hrd/absensi">
+                  <i class="bi bi-calendar-check me-2"></i> Absensi
+                </a>
+              </li>
+              <!-- Cuti & Izin -->
+              <li class="nav-item">
+                <a class="nav-link text-white" href="/admin_Hrd/lembur_izin">
+                  <i class="bi bi-person-dash me-2"></i> Lembur & Izin
+                </a>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <!-- Slip Gaji -->
+        <!--<li class="nav-item text-white">
+          <a class="nav-link" href="/admin_Hrd/slip_gaji">
+            <i class="bi bi-cash-stack menu-icon"></i>
+            <span class="menu-title">Slip Gaji</span>
+          </a>
+        </li>-->
+
+         <!-- Agenda Kunjungan --> 
+        <li class="nav-item text-white">
+          <a class="nav-link" href="/admin_Hrd/agenda">
+            <i class="bi bi-calendar-event menu-icon"></i>
+            <span class="menu-title">Agenda Kunjungan</span>
+          </a>
+        </li>
+
+        <!-- Kinerja Marketing --> 
+        <!--<li class="nav-item text-white">
+          <a class="nav-link" href="/admin_Hrd/kinerja_marketing">
+            <i class="bi bi-clipboard2-plus-fill menu-icon"></i>
+            <span class="menu-title">Kinerja Marketing</span>
+          </a>
+        </li>-->
+
+        <!-- Modul Rekrutmen -->
+        <!--<li class="nav-item text-white">
+          <a class="nav-link" href="/admin_Hrd/rekrutmen">
+            <i class="bi bi-person-plus menu-icon"></i>
+            <span class="menu-title">Rektrutmen</span>
+          </a>
+        </li>-->
+
+        <!-- Laporan -->
+        <!--<li class="nav-item text-white">
+          <a class="nav-link" href="/admin_Hrd/laporan">
+            <i class="bi bi-file-earmark-text menu-icon"></i>
+            <span class="menu-title">Laporan</span>
+          </a>
+        </li>-->
+
+        <!-- Pengaturan -->
+        <!--<li class="nav-item text-white">
+          <a class="nav-link" href="/admin_Hrd/pengaturan">
+            <i class="bi bi-gear menu-icon"></i>
+            <span class="menu-title">Pengaturan</span>
+          </a>
+        </li>-->
+
+      </ul>
+
+      </nav>

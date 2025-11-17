@@ -1,0 +1,227 @@
+<%- include('partials/header') %>
+
+<!-- Header -->
+<div class="appHeader bg-primary text-white shadow-sm">
+  <div class="left">
+    <a href="#" class="headerButton text-white" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+      <ion-icon name="menu-outline"></ion-icon>
+    </a>
+  </div>
+  <div class="pageTitle fw-bold">Detail Izin Bulanan</div>
+</div>
+
+<!-- Loader -->
+<div id="loader" style="display:none;">
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<!-- App Capsule -->
+<div id="appCapsule">
+
+  <!-- Profil Karyawan -->
+  <div class="section text-center mt-4">
+    <img src="https://ui-avatars.com/api/?name=Novan+Abaytulrohman&background=0D6EFD&color=fff&size=128&rounded=true"
+      class="rounded-circle shadow-lg border border-3 border-primary mb-3"
+      alt="Foto Tantri"
+      width="130"
+      height="130">
+    <h4 class="fw-bold mb-1">Novan Abaytulrohman</h4>
+    <p class="text-muted mb-2">
+      <ion-icon name="time-outline" class="me-1"></ion-icon> Jam Masuk: 08:12 WIB
+    </p>
+
+    <!-- Tombol Aksi -->
+    <div class="d-flex justify-content-center gap-3 mt-3 flex-wrap">
+      <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalFormIzin">
+        <ion-icon name="clipboard-outline" class="me-1"></ion-icon> Izin
+      </button>
+    </div>
+  </div>
+
+  <!-- Laporan Bulanan -->
+  <div class="section mt-4 px-3">
+    <div class="card rounded-4 border-0 shadow-sm">
+      <div class="card-body text-center">
+        <h5 class="fw-bold text-primary mb-3">
+          <ion-icon name="document-text-outline" class="me-1"></ion-icon>
+          Laporan Izin Terlambat & Sakit — Oktober 2025
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle text-center rounded-4 overflow-hidden shadow-sm">
+            <thead class="table-light">
+              <tr>
+                <th>Tanggal</th>
+                <th>Hari</th>
+                <th>Jenis Izin</th>
+                <th>Jam</th>
+                <th>Tanggal</th>
+                <th>Keterangan</th>
+                <th>Bukti</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1 Okt</td><td>Selasa</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:25</td><td>03-11-2025</td><td>Ban motor bocor saat berangkat</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>7 Okt</td><td>Senin</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:30</td><td>03-11-2025</td><td>Hujan deras, menunggu reda</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>9 Okt</td><td>Rabu</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>03-11-2025</td><td>Sakit kepala, disarankan istirahat</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>10 Okt</td><td>Kamis</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:18</td><td>03-11-2025</td><td>Macet di jalan utama</td><td><img src="https://images.unsplash.com/photo-1619715052527-d95e8df9ce16?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>12 Okt</td><td>Sabtu</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>03-11-2025</td><td>Migrain berat</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>14 Okt</td><td>Senin</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:22</td><td>03-11-2025</td><td>Motor mogok di perjalanan</td><td><img src="https://images.unsplash.com/photo-1614200179955-9187b7b27d45?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>17 Okt</td><td>Kamis</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>03-11-2025</td><td>Asam lambung kambuh</td><td><img src="https://images.unsplash.com/photo-1615473510377-8b7b4f0c4e6e?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>18 Okt</td><td>Jumat</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>03-11-2025</td><td>Demam ringan, izin tidak masuk</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>20 Okt</td><td>Senin</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>03-11-2025</td><td>Demam ringan, izin tidak masuk</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>22 Okt</td><td>Selasa</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:35</td><td>03-11-2025</td><td>Kendaraan umum terlambat datang</td><td><img src="https://images.unsplash.com/photo-1583267746540-69f16b5b5b6b?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>24 Okt</td><td>Kamis</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>03-11-2025</td><td>Batuk pilek disertai demam</td><td><img src="https://images.unsplash.com/photo-1588776814546-3f3a34a17180?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>26 Okt</td><td>Sabtu</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:40</td><td>03-11-2025</td><td>Macet karena kecelakaan kecil</td><td><img src="https://images.unsplash.com/photo-1619715052527-d95e8df9ce16?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>29 Okt</td><td>Selasa</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>03-11-2025</td><td>Tidak fit, istirahat di rumah</td><td><img src="https://images.unsplash.com/photo-1594312915251-48db9280c8a4?w=80" class="rounded shadow-sm" width="60"></td></tr>
+              <tr><td>31 Okt</td><td>Kamis</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:45</td><td>03-11-2025</td><td>Terjebak macet di lampu merah</td><td><img src="https://images.unsplash.com/photo-1619715052527-d95e8df9ce16?w=80" class="rounded shadow-sm" width="60"></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Generate Laporan -->
+  <!--<div class="section mt-4 mb-5 px-3">
+    <div class="card rounded-4 border-0 shadow-sm">
+      <div class="card-body">
+        <h5 class="fw-bold text-primary mb-3">
+          <ion-icon name="document-text-outline" class="me-1"></ion-icon> Generate Data Izin
+        </h5>
+        <form class="row g-3 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Pilih Bulan</label>
+            <input type="month" class="form-control rounded-pill px-3">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Tampilkan Data</label>
+            <select class="form-select rounded-pill px-3" id="selectData">
+              <option selected disabled>Pilih Jenis Data</option>
+              <option value="terlambat">Izin Terlambat</option>
+              <option value="sakit">Izin Sakit</option>
+            </select>
+          </div>
+          <div class="col-12 text-center">
+            <button type="button" class="btn btn-primary rounded-pill px-4" id="btnGenerate">
+              <ion-icon name="download-outline" class="me-1"></ion-icon> Generate Laporan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>-->
+
+  <!-- Hasil Generate -->
+  <div id="resultSection" class="section mt-3 px-3" style="display:none;">
+    <div class="card rounded-4 border-0 shadow-sm">
+      <div class="card-body" id="resultContent"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal Form Izin -->
+<div class="modal fade" id="modalFormIzin" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow-lg border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">
+          <ion-icon name="document-text-outline" class="me-2 text-primary"></ion-icon>
+          Form Pengajuan Izin
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formIzin" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="clipboard-outline" class="me-1 text-secondary"></ion-icon> Jenis Izin
+            </label>
+            <select class="form-select rounded-pill px-3">
+              <option selected disabled>Pilih jenis izin</option>
+              <option value="terlambat">Izin Terlambat</option>
+              <option value="sakit">Izin Keperluan Keluarga</option>
+              <option value="sakit">Izin Sakit</option>
+            </select>
+          </div>
+
+           <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="time-outline" class="me-1 text-secondary"></ion-icon> Tanggal Izin
+            </label>
+            <input type="time" class="form-control rounded-pill px-3" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="calendar-outline" class="me-1 text-secondary"></ion-icon> Tanggal Izin
+            </label>
+            <input type="date" class="form-control rounded-pill px-3" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="create-outline" class="me-1 text-secondary"></ion-icon> Alasan Izin
+            </label>
+            <textarea class="form-control rounded-4 p-3" placeholder="Tuliskan alasan izin..." rows="4" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="image-outline" class="me-1 text-secondary"></ion-icon> Upload Bukti (opsional)
+            </label>
+            <input type="file" class="form-control rounded-pill px-3" accept="image/*,application/pdf">
+            <small class="text-muted">Contoh: surat dokter, foto kondisi, dsb</small>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer border-0 d-flex justify-content-end">
+        <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+          <ion-icon name="close-outline" class="me-1"></ion-icon> Batal
+        </button>
+        <button class="btn btn-primary rounded-pill px-4">
+          <ion-icon name="send-outline" class="me-1"></ion-icon> Kirim Izin
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/navbar') %>
+<%- include('partials/footer') %>
+
+<!-- Script Generate -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const selectData = document.getElementById("selectData");
+    const btnGenerate = document.getElementById("btnGenerate");
+    const resultSection = document.getElementById("resultSection");
+    const resultContent = document.getElementById("resultContent");
+
+    btnGenerate.addEventListener("click", () => {
+      const val = selectData.value;
+      if (!val) return alert("Pilih jenis data terlebih dahulu!");
+
+      let html = "";
+      if (val === "terlambat") {
+        html = `
+        <h5 class="fw-bold text-warning mb-3">
+          <ion-icon name="alarm-outline" class="me-1"></ion-icon> Laporan Izin Terlambat
+        </h5>
+        <p class="text-muted">Total terlambat bulan ini: <strong>8 kali</strong></p>`;
+      } else if (val === "sakit") {
+        html = `
+        <h5 class="fw-bold text-danger mb-3">
+          <ion-icon name="medkit-outline" class="me-1"></ion-icon> Laporan Izin Sakit
+        </h5>
+        <p class="text-muted">Total sakit bulan ini: <strong>7 hari</strong></p>`;
+      }
+
+      resultSection.style.display = "block";
+      resultContent.innerHTML = html;
+      resultSection.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+</script>

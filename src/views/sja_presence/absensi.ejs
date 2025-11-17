@@ -1,0 +1,368 @@
+<%- include('partials/header') %>
+
+<!-- Header -->
+<div class="appHeader bg-primary text-white shadow-sm">
+  <div class="left">
+    <a href="#" class="headerButton text-white" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+      <ion-icon name="menu-outline"></ion-icon>
+    </a>
+  </div>
+  <div class="pageTitle fw-bold">Detail Absensi Bulanan</div>
+</div>
+
+<!-- App Capsule -->
+<div id="appCapsule" class="container-fluid py-4 px-3">
+
+  <!-- Profil -->
+  <br><br>
+  <div class="text-center mb-4">
+    <img src="https://ui-avatars.com/api/?name=Hermawan+&background=0D6EFD&color=fff&size=128&rounded=true"
+         class="rounded-circle shadow-lg border border-3 border-primary mb-3" width="110" height="110">
+    <h4 class="fw-bold mb-1">Hermawan, S.T</h4>
+    <p class="text-muted mb-0">Kepala Produksi</p>
+    <h5 class="fw-bold mb-1">PT. Senang Jaya Abadi</h5>
+    <small class="text-success">Periode: Oktober 2025</small>
+  </div>
+
+  <!-- Ringkasan -->
+  <div class="row text-center mb-4">
+    <div class="col-6 col-md-3 mb-3">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body py-3">
+          <ion-icon name="checkmark-circle-outline" class="text-success" style="font-size:24px;"></ion-icon>
+          <h6 class="mt-2 fw-bold">Hadir</h6>
+          <h5 class="text-success fw-bold">18 Hari</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body py-3">
+          <ion-icon name="alert-circle-outline" class="text-warning" style="font-size:24px;"></ion-icon>
+          <h6 class="mt-2 fw-bold">Terlambat</h6>
+          <h5 class="text-warning fw-bold">5x</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body py-3">
+          <ion-icon name="medkit-outline" class="text-danger" style="font-size:24px;"></ion-icon>
+          <h6 class="mt-2 fw-bold">Izin / Sakit</h6>
+          <h5 class="text-danger fw-bold">3 Hari</h5>
+        </div>
+      </div>
+    </div>
+    <div class="col-6 col-md-3 mb-3">
+      <div class="card shadow-sm border-0 rounded-4">
+        <div class="card-body py-3">
+          <ion-icon name="moon-outline" class="text-primary" style="font-size:24px;"></ion-icon>
+          <h6 class="mt-2 fw-bold">Lembur</h6>
+          <h5 class="text-primary fw-bold">44 Jam</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabel Absensi Bulanan -->
+  <div class="card shadow-sm border-0 rounded-4 mb-4">
+    <div class="card-body">
+      <h5 class="fw-bold text-primary mb-3">
+        <ion-icon name="calendar-outline" class="me-1"></ion-icon> Data Absensi Bulanan
+      </h5>
+      <div class="table-responsive">
+        <table class="table table-hover align-middle text-center rounded-4 overflow-hidden shadow-sm">
+          <thead class="table-light">
+            <tr>
+              <th>Tanggal</th>
+              <th>Hari</th>
+              <th>Status</th>
+              <th>Jam Masuk</th>
+              <th>Jam Pulang</th>
+              <th>Lembur</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1 Okt</td><td>Rabu</td><td><span class="badge bg-success">Hadir</span></td><td>08:00</td><td>16:30</td><td>01:30</td></tr>
+            <tr><td>2 Okt</td><td>Kamis</td><td><span class="badge bg-success">Hadir</span></td><td>08:05</td><td>16:33</td><td>01:30</td></tr>
+            <tr><td>3 Okt</td><td>Jumat</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:22</td><td>16:20</td><td>01:30</td></tr>
+            <tr><td>4 Okt</td><td>Sabtu</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>-</td><td>01:30</td></tr>
+            <tr><td>5 Okt</td><td>Minggu</td><td><span class="badge bg-secondary">Libur</span></td><td>-</td><td>-</td><td>01:30</td></tr>
+            <tr><td>6 Okt</td><td>Senin</td><td><span class="badge bg-danger">sakit</span></td><td>-</td><td>-</td><td>01:30</td></tr>
+            <tr><td>7 Okt</td><td>Selasa</td><td><span class="badge bg-danger">Izin Keperluan Keluarga</span></td><td>-</td><td>-</td><td>01:30</td></tr>
+            <tr><td>8 Okt</td><td>Rabu</td><td><span class="badge bg-success">Hadir</span></td><td>08:01</td><td>16:35</td><td>01:30</td></tr>
+            <tr><td>9 Okt</td><td>Kamis</td><td><span class="badge bg-success">Hadir</span></td><td>08:04</td><td>16:31</td><td>01:30</td></tr>
+            <tr><td>10 Okt</td><td>Jumat</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:25</td><td>16:15</td><td>01:30</td></tr>
+            <tr><td>11 Okt</td><td>Sabtu</td><td><span class="badge bg-success">Hadir</span></td><td>08:00</td><td>16:30</td><td>01:30</td></tr>
+            <tr><td>12 Okt</td><td>Minggu</td><td><span class="badge bg-secondary">Libur</span></td><td>-</td><td>-</td><td>01:30</td></tr>
+            <tr><td>13 Okt</td><td>Senin</td><td><span class="badge bg-success">Hadir</span></td><td>08:00</td><td>16:30</td><td>01:30</td></tr>
+            <tr><td>14 Okt</td><td>Selasa</td><td><span class="badge bg-success">Hadir</span></td><td>08:03</td><td>16:33</td><td>01:30</td></tr>
+            <tr><td>15 Okt</td><td>Rabu</td><td><span class="badge bg-success">Hadir</span></td><td>08:01</td><td>16:27</td><td>01:30</td></tr>
+            <tr><td>16 Okt</td><td>Kamis</td><td><span class="badge bg-success">Hadir</span></td><td>08:02</td><td>16:32</td><td>01:30</td></tr>
+            <tr><td>17 Okt</td><td>Jumat</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:18</td><td>16:30</td><td>01:30</td></tr>
+            <tr><td>18 Okt</td><td>Sabtu</td><td><span class="badge bg-success">Hadir</span></td><td>08:00</td><td>16:30</td><td>01:30</td></tr>
+            <tr><td>19 Okt</td><td>Minggu</td><td><span class="badge bg-secondary">Libur</span></td><td>-</td><td>-</td><td>01:30</td></tr>
+            <tr><td>20 Okt</td><td>Senin</td><td><span class="badge bg-success">Hadir</span></td><td>08:00</td><td>16:30</td><td>01:30</td></tr>
+            <tr><td>21 Okt</td><td>Selasa</td><td><span class="badge bg-success">Hadir</span></td><td>08:02</td><td>16:29</td><td>01:30</td></tr>
+            <tr><td>22 Okt</td><td>Rabu</td><td><span class="badge bg-danger">Sakit</span></td><td>-</td><td>-</td><td>01:30</td></tr>
+            <tr><td>23 Okt</td><td>Kamis</td><td><span class="badge bg-success">Hadir</span></td><td>08:03</td><td>16:33</td><td>01:30</td></tr>
+            <tr><td>24 Okt</td><td>Jumat</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:21</td><td>16:25</td><td>01:30</td></tr>
+            <tr><td>25 Okt</td><td>Sabtu</td><td><span class="badge bg-success">Hadir</span></td><td>08:00</td><td>16:30</td><td>01:30</td></tr>
+            <tr><td>26 Okt</td><td>Minggu</td><td><span class="badge bg-secondary">Libur</span></td><td>-</td><td>-</td><td>01:30</td></tr>
+            <tr><td>27 Okt</td><td>Senin</td><td><span class="badge bg-success">Hadir</span></td><td>08:01</td><td>16:29</td><td>01:30</td></tr>
+            <tr><td>28 Okt</td><td>Selasa</td><td><span class="badge bg-success">Hadir</span></td><td>08:03</td><td>16:34</td><td>01:30</td></tr>
+            <tr><td>29 Okt</td><td>Rabu</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>08:15</td><td>16:20</td><td>01:30</td></tr>
+            <tr><td>30 Okt</td><td>Kamis</td><td><span class="badge bg-success">Hadir</span></td><td>08:00</td><td>16:31</td><td>01:30</td></tr>
+            <tr><td>31 Okt</td><td>Jumat</td><td><span class="badge bg-success">Hadir</span></td><td>08:04</td><td>16:28</td><td>01:30</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Info Izin 
+  <div class="card shadow-sm border-0 rounded-4 mb-4">
+    <div class="card-body">
+      <h5 class="fw-bold text-danger mb-3">
+        <ion-icon name="medkit-outline" class="me-1"></ion-icon> Data Izin Terlambat & Sakit
+      </h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">07 Okt 2025 - Izin karena urusan keluarga</li>
+        <li class="list-group-item">21 Okt 2025 - Sakit flu berat (bukti surat dokter)</li>
+      </ul>
+    </div>
+  </div> -->
+
+<!-- ================= INFO LEMBUR (MODERN & RESPONSIVE VERSION) ================= -->
+<!-- <div class="card border-0 shadow-lg rounded-4 mb-4 overflow-hidden">
+  <div class="card-header bg-gradient text-white py-3" 
+       style="background: linear-gradient(135deg, #0d6efd, #4dabf7);">
+    <h5 class="mb-0 fw-bold d-flex align-items-center text-primary">
+      <ion-icon name="moon-outline" class="me-1"></ion-icon>
+      Data Lembur — Oktober 2025
+    </h5>
+  </div>
+
+  <div class="card-body bg-light">
+  <div class="list-group list-group-flush rounded-3 overflow-hidden">
+    <!-- Item lembur 
+    <div class="list-group-item d-flex justify-content-between align-items-start py-3">
+      <div>
+        <div class="fw-semibold text-dark">05/10/2025 <span class="text-muted">Senin</span></div>
+        <div class="small text-secondary">17:00 - 21:00 (4 Jam)</div>
+        <div class="text-success small fw-semibold">Bayaran: Rp. 100.000</div>
+      </div>
+      <ion-icon name="time-outline" class="text-primary fs-5"></ion-icon>
+    </div>
+
+    <div class="list-group-item d-flex justify-content-between align-items-start py-3">
+      <div>
+        <div class="fw-semibold text-dark">08/10/2025 <span class="text-muted">Rabu</span></div>
+        <div class="small text-secondary">17:00 - 22:00 (5 Jam)</div>
+        <div class="text-success small fw-semibold">Bayaran: Rp. 125.000</div>
+      </div>
+      <ion-icon name="time-outline" class="text-primary fs-5"></ion-icon>
+    </div>
+
+    <div class="list-group-item d-flex justify-content-between align-items-start py-3">
+      <div>
+        <div class="fw-semibold text-dark">12/10/2025 <span class="text-muted">Minggu</span></div>
+        <div class="small text-secondary">08:00 - 17:00 (8 Jam)</div>
+        <div class="text-success small fw-semibold">Bayaran: Rp. 150.000</div>
+      </div>
+      <ion-icon name="time-outline" class="text-primary fs-5"></ion-icon>
+    </div>
+
+    <div class="list-group-item d-flex justify-content-between align-items-start py-3">
+      <div>
+        <div class="fw-semibold text-dark">15/10/2025 <span class="text-muted">Rabu</span></div>
+        <div class="small text-secondary">17:00 - 23:00 (6 Jam)</div>
+        <div class="text-success small fw-semibold">Bayaran: Rp. 150.000</div>
+      </div>
+      <ion-icon name="time-outline" class="text-primary fs-5"></ion-icon>
+    </div>
+
+    <div class="list-group-item d-flex justify-content-between align-items-start py-3">
+      <div>
+        <div class="fw-semibold text-dark">19/10/2025 <span class="text-muted">Minggu</span></div>
+        <div class="small text-secondary">08:00 - 17:00 (8 Jam)</div>
+        <div class="text-success small fw-semibold">Bayaran: Rp. 150.000</div>
+      </div>
+      <ion-icon name="time-outline" class="text-primary fs-5"></ion-icon>
+    </div>
+
+    <div class="list-group-item d-flex justify-content-between align-items-start py-3">
+      <div>
+        <div class="fw-semibold text-dark">23/10/2025 <span class="text-muted">Kamis</span></div>
+        <div class="small text-secondary">17:00 - 22:00 (5 Jam)</div>
+        <div class="text-success small fw-semibold">Bayaran: Rp. 125.000</div>
+      </div>
+      <ion-icon name="time-outline" class="text-primary fs-5"></ion-icon>
+    </div>
+
+    <div class="list-group-item d-flex justify-content-between align-items-start py-3">
+      <div>
+        <div class="fw-semibold text-dark">26/10/2025 <span class="text-muted">Minggu</span></div>
+        <div class="small text-secondary">08:00 - 17:00 (8 Jam)</div>
+        <div class="text-success small fw-semibold">Bayaran: Rp. 150.000</div>
+      </div>
+      <ion-icon name="time-outline" class="text-primary fs-5"></ion-icon>
+    </div>-->
+
+    <!-- Ringkasan 
+    <div class="mt-4 p-3 bg-white border rounded-3 shadow-sm">
+      <h5 class="mb-3 fw-bold d-flex align-items-center text-secondary">
+        <ion-icon name="stats-chart-outline" class="me-2"></ion-icon> Ringkasan Lembur
+      </h5>
+      <ul class="list-unstyled mb-3 small text-secondary">
+        <li><strong>Lembur Harian di Luar Minggu:</strongc> Rp. 25.000 x 20 jam = Rp. 500.000</li>
+        <hr>
+        <li><strong>Hari Libur:</strong> Rp. 150.000 x 3 Hari = Rp. 450.000</li>
+        <hr>
+        <li><strong>Potongan Hutang:</strong> -</li>
+        <hr>
+        <li><strong>Potongan Keterlambatan:</strong> -</li>
+        <hr>
+        <!--<li><strong>Lembur per Jam:</strong> Rp. 25.000</li>
+        <li><strong>Total Jam Lembur:</strong> 44 Jam</li>
+        <li><strong>Total Hari Lembur:</strong> 7 Hari </li>
+        <li><strong>Total Bayaran:</strong> <span class="text-success fw-bold"> Rp. 950.000</span></li>
+      </ul>
+    </div>
+  </div>
+  </div>-->
+
+  <!-- Info Gaji -->
+  <!-- <div class="card shadow-sm border-0 rounded-4 mb-5">
+    <div class="card-body">
+      <h5 class="fw-bold text-success mb-3">
+        <ion-icon name="cash-outline" class="me-1"></ion-icon> Rincian Gaji Bulan Oktober 2025
+      </h5>
+
+      <div class="table-responsive">
+        <table class="table table-borderless mb-0">
+          <tr><td>Gaji Pokok</td><td class="text-end fw-bold">Rp 5.000.000</td></tr>
+          <tr><td>Tunjangan Transport</td><td class="text-end fw-bold">Rp 500.000</td></tr>
+          <tr><td>Tunjangan Makan</td><td class="text-end fw-bold">Rp 300.000</td></tr>
+          <tr><td>Lembur (39 Jam)</td><td class="text-end fw-bold">Rp 780.000</td></tr>
+          <tr><td>Potongan Terlambat (3x)</td><td class="text-end text-danger fw-bold">-Rp 75.000</td></tr>
+          <tr><td>Potongan Izin (2 Hari)</td><td class="text-end text-danger fw-bold">-Rp 100.000</td></tr>
+          <tr class="table-light">
+            <td class="fw-bold text-primary">Total Gaji Diterima</td>
+            <td class="text-end fw-bold text-primary">Rp 6.405.000</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="text-center mt-3">
+        <button class="btn btn-outline-primary rounded-pill px-4" onclick="window.print()">
+          <ion-icon name="print-outline" class="me-1"></ion-icon> Cetak Laporan Gaji
+        </button>
+      </div>
+    </div>
+  </div> -->
+
+</div>
+<br>
+
+<!-- ==================== MODAL FORM TERLAMBAT ==================== -->
+<div class="modal fade" id="modalFormTerlambat" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow-lg border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">
+          <ion-icon name="time-outline" class="me-2 text-warning"></ion-icon>
+          Form Keterlambatan Karyawan
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="formTerlambat" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="calendar-outline" class="me-1 text-secondary"></ion-icon> Tanggal
+            </label>
+            <input type="text" id="tglTerlambat" class="form-control rounded-pill px-3 bg-light" readonly>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="time-outline" class="me-1 text-secondary"></ion-icon> Jam Masuk Aktual
+            </label>
+            <input type="time" id="jamDatang" class="form-control rounded-pill px-3" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="document-text-outline" class="me-1 text-secondary"></ion-icon> Alasan Keterlambatan
+            </label>
+            <textarea id="alasanTerlambat" class="form-control rounded-4 p-3" placeholder="Tuliskan alasan keterlambatan..." rows="4" required></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="image-outline" class="me-1 text-secondary"></ion-icon> Upload Bukti (opsional)
+            </label>
+            <input type="file" id="buktiTerlambat" class="form-control rounded-pill px-3" accept="image/*,application/pdf">
+            <small class="text-muted">Contoh: foto kondisi jalan, surat keterlambatan, dll</small>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer border-0 d-flex justify-content-end">
+        <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+          <ion-icon name="close-outline" class="me-1"></ion-icon> Batal
+        </button>
+        <button class="btn btn-warning rounded-pill px-4 text-dark" id="btnSimpanTerlambat">
+          <ion-icon name="save-outline" class="me-1"></ion-icon> Ajukan keterlambatan
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/navbar') %>
+<%- include('partials/footer') %>
+
+<!-- ==================== SCRIPT MODAL TERLAMBAT ==================== -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const modal = new bootstrap.Modal(document.getElementById("modalFormTerlambat"));
+  const inputTanggal = document.getElementById("tglTerlambat");
+
+  // Klik baris status "Terlambat" → buka modal
+  document.querySelectorAll("tbody tr").forEach(row => {
+    const status = row.querySelector(".badge");
+    if (status && status.classList.contains("bg-warning")) {
+      row.style.cursor = "pointer";
+      row.classList.add("table-warning");
+
+      row.addEventListener("click", function () {
+        const tanggal = row.querySelectorAll("td")[0].textContent.trim();
+        inputTanggal.value = tanggal;
+        modal.show();
+      });
+    }
+  });
+
+  // Simpan data keterlambatan (sementara ke console)
+  document.getElementById("btnSimpanTerlambat").addEventListener("click", function () {
+    const tanggal = inputTanggal.value;
+    const jamDatang = document.getElementById("jamDatang").value;
+    const alasan = document.getElementById("alasanTerlambat").value;
+    const bukti = document.getElementById("buktiTerlambat").files[0];
+
+    if (!jamDatang || !alasan) {
+      alert("Mohon lengkapi jam datang dan alasan keterlambatan.");
+      return;
+    }
+
+    console.log("Data keterlambatan:", { tanggal, jamDatang, alasan, bukti });
+    alert("Data keterlambatan berhasil disimpan untuk tanggal " + tanggal);
+
+    modal.hide();
+    document.getElementById("formTerlambat").reset();
+  });
+});
+</script> 

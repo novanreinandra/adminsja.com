@@ -1,0 +1,681 @@
+<%- include('partials/header') %>
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <%- include('partials/navbar') %>
+
+      <!-- Main Panel -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="container-fluid">
+              <!-- Title -->
+                <div class="card shadow-sm mb-4">
+                  <div class="card-body">
+                   <div class="row align-items-start mb-3 g-3">
+                    <!-- Kolom Judul -->
+                    <div class="col-lg-6 col-md-12">
+                      <h3><i class="bi bi-clock-history me-2"></i> Lembur</h3>
+                      <p class="text-muted mb-2">Laporan Lembur Karyawan Bulanan</p>
+                      <hr>
+                    </div>
+
+                    <!-- Fitur Filter di Atas Tabel -->
+                    <div class="col-lg-6 col-md-12">
+                      <div class="d-flex flex-wrap justify-content-lg-end justify-content-start align-items-end gap-3">
+
+                        <!-- Dari Tanggal -->
+                        <div class="form-group" style="min-width: 200px;">
+                          <label for="dariTanggal" class="form-label mb-1">Dari Tanggal</label>
+                          <input 
+                            type="date" 
+                            class="form-control h-100 py-2" 
+                            id="dariTanggal" 
+                            name="dari_tanggal" 
+                            style="min-height: 38px;">
+                        </div>
+
+                        <!-- Sampai Tanggal -->
+                        <div class="form-group" style="min-width: 200px;">
+                          <label for="sampaiTanggal" class="form-label mb-1">Sampai Tanggal</label>
+                          <input 
+                            type="date" 
+                            class="form-control h-100 py-2" 
+                            id="sampaiTanggal" 
+                            name="sampai_tanggal" 
+                            style="min-height: 38px;">
+                        </div>
+
+                        <!-- Tombol Filter -->
+                        <div class="form-group d-flex align-items-end">
+                          <button 
+                            type="button" 
+                            class="btn btn-primary px-4 py-2" 
+                            style="background-color: #0d6efd; min-height: 38px;">
+                            <i class="bi bi-funnel me-1"></i> Filter
+                          </button>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    <!-- Kolom Tombol Kanan Atas -->
+                    <div class="col-lg-6 col-md-12 d-flex justify-content-lg-end justify-content-md-start align-items-start">
+                      <div class="d-flex flex-wrap gap-2">
+                        <!-- Placeholder tombol tambahan -->
+                        <!--
+                        <a href="/admin_gudang/cetak_lembur" target="_blank" class="btn btn-success btn-sm rounded-pill px-4">
+                          <i class="bi bi-printer me-1"></i> Cetak Laporan Lembur
+                        </a>
+                        -->
+                      </div>
+                    </div>
+                  </div>
+
+                  
+                    <!-- Konten Tabel -->
+                    <div class="table-responsive">
+                      <div id="areaCetak">
+                        <table class="table">
+                          <thead class="table-light">
+                            <tr>
+                              <th>No</th>
+                              <th>Nama</th>
+                              <th>Tanggal Lembur</th>
+                              <th>Hari</th>
+                              <th>Jam Lembur</th>
+                              <th>Jam Pulang Lembur</th>
+                              <th>Status</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                             <% const dataLembur = [
+                              {
+                                id: 1,
+                                nama: 'Irfan Dwi',
+                                tanggal_mulai: '02-11-2025',
+                                hari: 'Minggu',
+                                jam_lembur: '08:00',
+                                jam_pulang_lembur: '15:00',
+                                status: 'Lembur Ditolak'
+                              },
+                            ]; %>
+
+                            <% dataLembur.forEach((d, index) => { %>
+                              <tr>
+                                <td><%= index + 1 %></td>
+                                <td class="fw-semibold text-capitalize"><%= d.nama %></td>
+                                <td><%= d.tanggal_mulai %></td>
+                                <td><%= d.hari %></td>
+                                <td><%= d.jam_lembur %></td>
+                                <td><%= d.jam_pulang_lembur %></td>
+                                <!-- Status Klikable -->
+                                <td class="status-cell">
+                                  <span class="badge bg-<%= d.status === 'Lembur Disetujui' ? 'success' : d.status === 'Menunggu Persetujuan' ? 'warning text-dark' : 'danger' %> status-toggle"
+                                        data-id="<%= d.id %>"
+                                        data-status="<%= d.status %>"
+                                        style="cursor: pointer;">
+                                    <%= d.status %>
+                                  </span>
+                                </td>
+                              </tr>
+                              <% }); %>
+                          </tbody>
+                        </table>
+                      </div>
+                  </div>
+                  <!-- Pagination -->
+                   <nav aria-label="Navigasi halaman karyawan" class="mt-3">
+                     <ul class="pagination justify-content-end">
+                       <li class="page-item disabled">
+                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Sebelumnya</a>
+                       </li>
+                       <li class="page-item active" aria-current="page">
+                         <a class="page-link" href="#">1</a>
+                       </li>
+                       <li class="page-item"><a class="page-link" href="#">2</a></li>
+                       <li class="page-item"><a class="page-link" href="#">3</a></li>
+                       <li class="page-item">
+                         <a class="page-link" href="#">Selanjutnya</a>
+                       </li>
+                     </ul>
+                   </nav>
+
+                    <!-- Modal Form Pengajuan Lembur Start-->
+                    <div class="modal fade" id="ajukancutiModal" tabindex="-1" aria-labelledby="pengajuanModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-lg">
+                        <form id="formPengajuan">
+                          <div class="modal-content">
+                            <div class="modal-header bg-secondary text-dark">
+                              <h5 class="modal-title" id="pengajuanModalLabel"><i class="bi bi-clock-history me-2"></i> Pengajuan Lembur</h5>
+                              <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="row g-3">
+                                <div class="col-md-6">
+                                  <label for="nama" class="form-label">Nama</label>
+                                  <select class="form-select" id="nama" name="nama" required>
+                                    <option value="">-- Pilih Nama --</option>
+                                    <option value="Budi">Irfan Dwi</option>
+                                  </select>
+                                </div>
+
+                              <div class="col-6">
+                                <label for="tanggal_mulai" class="form-label">Tanggal Lembur</label>
+                                <div class="row">
+                                  <div class="col-md-5 col-sm-12 mb-2">
+                                    <input type="date" class="form-control" id="tanggal_mulai" name="tanggal_mulai" required>
+                                  </div>
+                                  <div class="col-md-2 col-sm-12 text-center align-self-center mb-2">
+                                    <span>sampai</span>
+                                  </div>
+                                  <div class="col-md-5 col-sm-12">
+                                    <input type="date" class="form-control" id="tanggal_selesai" name="tanggal_selesai" required>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                              <div class="col-md-6">
+                                <label for="jenis" class="form-label">Jenis Lembur</label>
+                                <input class="form-control" id="jenis" name="jenis" required>
+                              </div>
+                              <div class="col-md-6">
+                                <label for="jamMasuk" class="form-label">Masuk Lembur (jika ada)</label>
+                                <input type="time" class="form-control" id="jamMasuk" name="jamMasuk">
+                              </div>
+                              <div class="col-md-6">
+                                <label for="jamLembur" class="form-label">Jumlah Jam Lembur</label>
+                                <input type="number" class="form-control" id="jamLembur" name="jamLembur" min="0" value="0">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary rounded-pill px-4">
+                              <i class="bi bi-check-circle me-1"></i> Ajukan Lembur
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <!-- End Modal Form Pengajuan Lembur -->
+                   
+              </div>
+            </div>
+
+          <!-- TERLAMBAT -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <div class="row align-items-start mb-3 g-3">
+                <!-- Kolom Judul -->
+                <div class="col-lg-6 col-md-12">
+                  <h3 class="mb-0">
+                    <i class="bi-alarm"></i> Daftar Laporan Izin
+                  </h3>
+                  <p class="text-muted mb-2">Laporan pengajuan Izin Terlambat | Keperluan Pribadi / Keluarga | Izin Cuti / Sakit</p>
+                  <hr>
+                </div>
+
+                <!-- Kolom Tombol Kanan Atas -->
+                <div class="col-lg-6 col-md-12 d-flex justify-content-lg-end justify-content-md-start align-items-start">
+                  <div class="d-flex flex-wrap gap-2">
+                    <!-- Tombol Cetak -->
+                    <!--<a href="/admin_gudang/cetak_terlambat" target="_blank" class="btn btn-warning btn-sm rounded-pill px-4">
+                      <i class="bi bi-printer me-1"></i> Cetak Laporan Izin
+                    </a>-->
+
+                    <!-- Tombol Ajukan -->
+                    <!--<button class="btn btn-secondary btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#ajukanTerlambat">
+                      <i class="bi bi-alarm"></i> Ajukan Terlambat
+                    </button>-->
+                  </div>
+                </div>
+              </div>
+
+            <!-- ==================== TABEL DATA IZIN & TERLAMBAT (VERSI MODERN) ==================== -->
+            <div class="table-responsive">
+              <div id="areaCetak">
+                <table class="table align-middle text-center mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>No</th>
+                      <th>Nama</th>
+                      <th>Tanggal Mulai Izin</th>
+                      <th>Tanggal Selesai Izin</th>
+                      <th>Hari</th>
+                      <th>Jenis Izin</th>
+                      <th>Alasan Izin</th>
+                      <th>Jam Izin</th>
+                      <th>Lampiran</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% const dataTerlambat = [
+                      {
+                        id_terlambat: 1,
+                        nama: 'Irfan Dwi',
+                        tanggal_mulai_izin: '03-11-2025',
+                        tanggal_selesai_izin: '04-11-2025',
+                        hari: 'Selasa',
+                        jenis_izin: 'Terlambat',
+                        alasan_izin: 'Macet di jalan utama',
+                        jam_izin: '08:30',
+                        bukti: '/uploads/foto_bara.jpg',
+                        status: 'Belum disetujui'
+                      },
+                    ]; %>
+
+                    <% dataTerlambat.forEach((d, index) => { %>
+                      <tr>
+                        <td><%= index + 1 %></td>
+                        <td class="fw-semibold text-capitalize"><%= d.nama %></td>
+                        <td><%= d.tanggal_mulai_izin %></td>
+                        <td><%= d.tanggal_selesai_izin %></td>
+                        <td><%= d.hari %></td>
+
+                        <td>
+                          <% 
+                            let izinClass = 'bg-warning text-dark';
+                            if (d.jenis_izin.toLowerCase() === 'sakit') izinClass = 'bg-danger';
+                            else if (d.jenis_izin.toLowerCase() === 'izin terlambat') izinClass = 'bg-warning text-dark';
+                            else if (d.jenis_izin.toLowerCase() === 'izin keperluan keluarga') izinClass = 'bg-info text-dark';
+                          %>
+                          <span class="badge <%= izinClass %> rounded-pill px-3 py-2">
+                            <%= d.jenis_izin %>
+                          </span>
+                        </td>
+
+                        <td><%= d.alasan_izin %></td>
+                        <td><%= d.jam_izin %></td>
+
+                        <!-- Bukti Upload -->
+                        <td>
+                          <% if (d.bukti) { %>
+                            <img src="<%= d.bukti %>" alt="Bukti" class="rounded-circle shadow-sm" style="width:45px;height:45px;object-fit:cover;">
+                          <% } else { %>
+                            <span class="text-muted fst-italic">Tidak ada</span>
+                          <% } %>
+                        </td>
+
+                      <td class="status-cell"><span class="badge bg-<%= d.status === 'Disetujui' ? 'primary' : d.status === 'Belum disetujui' ? 'warning text-white' : 'danger' %> status-terlambat" data-id="<%= d.id_terlambat %>" data-status="<%= d.status %>" style="cursor: pointer;"><%= d.status %></span></td>
+                    <!--<td>
+                          <div class="d-flex justify-content-center gap-2">
+                            <<button class="btn btn-sm btn-secondary rounded-pill px-4" 
+                                    data-bs-toggle="modal" data-bs-target="#editajukanTerlambat"
+                                    title="Edit Pengajuan">
+                              <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger rounded-pill px-4"
+                                    data-bs-toggle="modal" data-bs-target="#modalHapus"
+                                    title="Hapus Data">
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </div>
+                        </td> -->
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+              <!-- Pagination -->
+              <nav aria-label="Navigasi halaman terlambat" class="mt-3">
+                <ul class="pagination justify-content-end">
+                  <li class="page-item disabled"><a class="page-link">Sebelumnya</a></li>
+                  <li class="page-item active"><a class="page-link">1</a></li>
+                  <li class="page-item"><a class="page-link">2</a></li>
+                  <li class="page-item"><a class="page-link">3</a></li>
+                  <li class="page-item"><a class="page-link">Selanjutnya</a></li>
+                </ul>
+              </nav>
+
+              <!-- Modal Edit Ajukan Keterlambatan -->
+              <div class="modal fade" id="editajukanTerlambat" tabindex="-1" aria-labelledby="eitajukanTerlambatLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content shadow-lg border-0 rounded-3">
+                    <form id="formAjukanTerlambat" enctype="multipart/form-data">
+                      
+                      <!-- HEADER -->
+                      <div class="modal-header bg-secondary text-dark">
+                        <h5 class="modal-title" id="editajukanTerlambatLabel">
+                          <i class="bi bi-alarm"></i> Edit Ajukan Keterlambatan
+                        </h5>
+                        <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal"></button>
+                      </div>
+
+                      <!-- BODY -->
+                      <div class="modal-body row g-3 px-3 py-3">
+
+                        <!-- Nama -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Nama</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                            <select class="form-select" id="nama" name="nama" required>
+                              <option value="">-- Pilih Nama --</option>
+                              <option value="Bara">Irfan Dwi</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <!-- Tanggal -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Tanggal</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-calendar-date"></i></span>
+                            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                          </div>
+                        </div>
+
+                        <!-- Jam Masuk -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Jam Masuk</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-clock"></i></span>
+                            <input type="time" class="form-control" id="jam_masuk" name="jam_masuk" required>
+                          </div>
+                        </div>
+
+                        <!-- Foto -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Foto Bukti</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-camera"></i></span>
+                            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" onchange="previewFoto(event)" required>
+                          </div>
+                          <div class="mt-2 text-center">
+                            <img id="previewImage" src="#" alt="Preview Foto" class="img-thumbnail rounded-3 shadow-sm" style="display:none; width:120px; height:120px; object-fit:cover;">
+                          </div>
+                        </div>
+
+                        <!-- Keterangan -->
+                        <div class="col-12">
+                          <label class="form-label fw-semibold">Keterangan</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-chat-left-text"></i></span>
+                            <textarea class="form-control" id="keterangan" name="keterangan" rows="2" placeholder="Tuliskan alasan keterlambatan..." required></textarea>
+                          </div>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Status</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-flag"></i></span>
+                            <select class="form-select" id="status" name="status" required>
+                              <option value="Menunggu">Menunggu</option>
+                              <option value="Disetujui">Disetujui</option>
+                              <option value="Ditolak">Ditolak</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- FOOTER -->
+                      <div class="modal-footer px-3 pb-3">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                          <i class="bi bi-x-circle me-1"></i> Batal
+                        </button>
+                        <button type="submit" class="btn rounded-pill px-4 fw-semibold" style="background-color: #0d6efd; color: #fff;">
+                          <i class="bi bi-send-check me-1"></i> Ajukan
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Modal Ajukan Keterlambatan -->
+              <div class="modal fade" id="ajukanTerlambat" tabindex="-1" aria-labelledby="ajukanTerlambatLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content shadow-lg border-0 rounded-3">
+                    <form id="formAjukanTerlambat" enctype="multipart/form-data">
+                      
+                      <!-- HEADER -->
+                      <div class="modal-header bg-secondary text-dark">
+                        <h5 class="modal-title" id="ajukanTerlambatLabel">
+                          <i class="bi bi-alarm"></i> Ajukan Keterlambatan
+                        </h5>
+                        <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal"></button>
+                      </div>
+
+                      <!-- BODY -->
+                      <div class="modal-body row g-3 px-3 py-3">
+
+                        <!-- Nama -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Nama</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                            <select class="form-select" id="nama" name="nama" required>
+                              <option value="">-- Pilih Nama --</option>
+                              <option value="Bara">Irfan Dwi</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <!-- Tanggal -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Tanggal</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-calendar-date"></i></span>
+                            <input type="date" class="form-control" id="tanggal" name="tanggal" required>
+                          </div>
+                        </div>
+
+                        <!-- Jam Masuk -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Jam Masuk</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-clock"></i></span>
+                            <input type="time" class="form-control" id="jam_masuk" name="jam_masuk" required>
+                          </div>
+                        </div>
+
+                        <!-- Foto -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Foto Bukti</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-camera"></i></span>
+                            <input type="file" class="form-control" id="foto" name="foto" accept="image/*" onchange="previewFoto(event)" required>
+                          </div>
+                          <div class="mt-2 text-center">
+                            <img id="previewImage" src="#" alt="Preview Foto" class="img-thumbnail rounded-3 shadow-sm" style="display:none; width:120px; height:120px; object-fit:cover;">
+                          </div>
+                        </div>
+
+                        <!-- Keterangan -->
+                        <div class="col-12">
+                          <label class="form-label fw-semibold">Keterangan</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-chat-left-text"></i></span>
+                            <textarea class="form-control" id="keterangan" name="keterangan" rows="2" placeholder="Tuliskan alasan keterlambatan..." required></textarea>
+                          </div>
+                        </div>
+
+                        <!-- Status -->
+                        <div class="col-md-6">
+                          <label class="form-label fw-semibold">Status</label>
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"><i class="bi bi-flag"></i></span>
+                            <select class="form-select" id="status" name="status" required>
+                              <option value="Menunggu">Menunggu</option>
+                              <option value="Disetujui">Disetujui</option>
+                              <option value="Ditolak">Ditolak</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- FOOTER -->
+                      <div class="modal-footer px-3 pb-3">
+                        <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                          <i class="bi bi-x-circle me-1"></i> Batal
+                        </button>
+                        <button type="submit" class="btn rounded-pill px-4 fw-semibold" style="background-color: #0d6efd; color: #fff;">
+                          <i class="bi bi-send-check me-1"></i> Ajukan
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+           <!-- Daftar Laporan Approve -->
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <div class="row align-items-start mb-3 g-3">
+                <!-- Kolom Judul -->
+                <div class="col-lg-6 col-md-12">
+                  <h3 class="mb-0">
+                    <i class="bi bi-calendar-check me-2"></i> Daftar Laporan Izin Yang Telah Disetujui
+                  </h3>
+                  <hr>
+                </div>
+
+                <!-- Kolom Tombol Kanan Atas -->
+                <div class="col-lg-6 col-md-12 d-flex justify-content-lg-end justify-content-md-start align-items-start">
+                  <div class="d-flex flex-wrap gap-2">
+                    <!-- Tombol Cetak -->
+                    <!--<a href="/admin_gudang/cetak_terlambat" target="_blank" class="btn btn-warning btn-sm rounded-pill px-4">
+                      <i class="bi bi-printer me-1"></i> Cetak Laporan Izin
+                    </a>-->
+
+                    <!-- Tombol Ajukan -->
+                    <!--<button class="btn btn-secondary btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#ajukanTerlambat">
+                      <i class="bi bi-alarm"></i> Ajukan Terlambat
+                    </button>-->
+                  </div>
+                </div>
+              </div>
+
+            <!-- ==================== TABEL DATA IZIN & TERLAMBAT (VERSI MODERN) ==================== -->
+            <div class="table-responsive">
+              <div id="areaCetak">
+                <table class="table align-middle text-center mb-0">
+                  <thead class="table-light">
+                    <tr>
+                      <th>No</th>
+                      <th>Nama</th>
+                      <th>Tanggal Mulai Izin</th>
+                      <th>Tanggal Selesai Izin</th>
+                      <th>Hari</th>
+                      <th>Jenis Izin</th>
+                      <th>Alasan Izin</th>
+                      <th>Jam Izin</th>
+                      <th>Lampiran</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <% const dataTelahDisetujui = [
+                      {
+                        id_terlambat: 1,
+                        nama: 'Irfan Dwi',
+                        tanggal_mulai_izin: '03-11-2025',
+                        tanggal_selesai_izin: '04-11-2025',
+                        hari: 'Selasa',
+                        jenis_izin: 'Terlambat',
+                        alasan_izin: 'Macet di jalan utama',
+                        jam_izin: '08:30',
+                        bukti: '/uploads/foto_bara.jpg',
+                        status: 'Disetujui'
+                      },
+                    ]; %>
+
+                    <% dataTelahDisetujui.forEach((d, index) => { %>
+                      <tr>
+                        <td><%= index + 1 %></td>
+                        <td class="fw-semibold text-capitalize"><%= d.nama %></td>
+                        <td><%= d.tanggal_mulai_izin %></td>
+                        <td><%= d.tanggal_selesai_izin %></td>
+                        <td><%= d.hari %></td>
+
+                        <td>
+                          <% 
+                            let izinClass = 'bg-warning text-dark';
+                            if (d.jenis_izin.toLowerCase() === 'sakit') izinClass = 'bg-danger';
+                            else if (d.jenis_izin.toLowerCase() === 'izin terlambat') izinClass = 'bg-warning text-dark';
+                            else if (d.jenis_izin.toLowerCase() === 'izin keperluan keluarga') izinClass = 'bg-info text-dark';
+                          %>
+                          <span class="badge <%= izinClass %> rounded-pill px-3 py-2">
+                            <%= d.jenis_izin %>
+                          </span>
+                        </td>
+
+                        <td><%= d.alasan_izin %></td>
+                        <td><%= d.jam_izin %></td>
+
+                        <!-- Bukti Upload -->
+                        <td>
+                          <% if (d.bukti) { %>
+                            <img src="<%= d.bukti %>" alt="Bukti" class="rounded-circle shadow-sm" style="width:45px;height:45px;object-fit:cover;">
+                          <% } else { %>
+                            <span class="text-muted fst-italic">Tidak ada</span>
+                          <% } %>
+                        </td>
+
+                      <td class="status-cell"><span class="badge bg-<%= d.status === 'Disetujui' ? 'primary' : d.status === 'Belum disetujui' ? 'warning text-white' : 'danger' %> status-terlambat" data-id="<%= d.id_terlambat %>" data-status="<%= d.status %>" style="cursor: pointer;"><%= d.status %></span></td>
+                    <!--<td>
+                          <div class="d-flex justify-content-center gap-2">
+                             <button class="btn btn-sm btn-secondary rounded-pill px-4" 
+                                    data-bs-toggle="modal" data-bs-target="#editajukanTerlambat"
+                                    title="Edit Pengajuan">
+                              <i class="bi bi-pencil-square"></i>
+                            </button> 
+                            <button class="btn btn-sm btn-danger rounded-pill px-4"
+                                    data-bs-toggle="modal" data-bs-target="#modalHapus"
+                                    title="Hapus Data">
+                              <i class="bi bi-trash"></i>
+                            </button> 
+                          </div>
+                        </td> -->
+                      </tr>
+                    <% }); %>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+              <!-- Pagination -->
+              <nav aria-label="Navigasi halaman terlambat" class="mt-3">
+                <ul class="pagination justify-content-end">
+                  <li class="page-item disabled"><a class="page-link">Sebelumnya</a></li>
+                  <li class="page-item active"><a class="page-link">1</a></li>
+                  <li class="page-item"><a class="page-link">2</a></li>
+                  <li class="page-item"><a class="page-link">3</a></li>
+                  <li class="page-item"><a class="page-link">Selanjutnya</a></li>
+                </ul>
+              </nav>
+
+            </div>
+          </div>
+
+      </div>
+    </div>
+  </div>
+<%- include('partials/footer') %>
+
+<!-- Script Preview Foto -->
+<script>
+  function previewFoto(event) {
+    const input = event.target;
+    const preview = document.getElementById('previewImage');
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>

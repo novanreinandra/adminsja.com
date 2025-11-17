@@ -1,0 +1,222 @@
+<%- include('partials/header') %>
+
+<!-- Header -->
+<div class="appHeader bg-primary text-white shadow-sm">
+  <div class="left">
+    <a href="#" class="headerButton text-white" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+      <ion-icon name="menu-outline"></ion-icon>
+    </a>
+  </div>
+  <div class="pageTitle fw-bold">Detail Izin Bulanan</div>
+</div>
+
+<!-- Loader -->
+<div id="loader" style="display:none;">
+  <div class="spinner-border text-primary" role="status"></div>
+</div>
+
+<!-- App Capsule -->
+<div id="appCapsule">
+
+  <!-- Profil Karyawan -->
+  <div class="section text-center mt-4">
+
+    <!-- Tombol Aksi -->
+    <div class="d-flex justify-content-center gap-3 mt-3 flex-wrap">
+      <button class="btn btn-primary rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalFormIzin">
+        <ion-icon name="clipboard-outline" class="me-1"></ion-icon> Izin Terlambat & Sakit
+      </button>
+    </div>
+  </div>
+
+  <!-- Laporan Bulanan -->
+  <div class="section mt-4 px-3">
+    <div class="card rounded-4 border-0 shadow-sm">
+      <div class="card-body text-center">
+        <h5 class="fw-bold text-primary mb-3">
+          <ion-icon name="document-text-outline" class="me-1"></ion-icon>
+          Laporan Izin Terlambat & Sakit — Oktober 2025
+        </h5>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle text-center rounded-4 overflow-hidden shadow-sm">
+            <thead class="table-light">
+              <tr>
+                <th>Tanggal Mulai Izin</th>
+                <th>Tanggal Selesai Izin</th>
+                <th>Hari</th>
+                <th>Jenis Izin</th>
+                <th>Alasan Izin</th>
+                <th>Jam Izin</th>
+                <th>Bukti</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>03-11-2025</td><td>03-11-2025</td><td>Selasa</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>Ban motor bocor saat berangkat</td><td>08:25</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td><td><span class="badge bg-primary text-white">Disetujui</span></td></tr>
+              <tr><td>04-11-2025</td><td>04-11-2025</td><td>Senin</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>Hujan deras, menunggu reda</td><td>08:30</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td><td><span class="badge bg-primary text-white">Disetujui</span></td></tr>
+              <tr><td>05-11-2025</td><td>05-11-2025</td><td>Rabu</td><td><span class="badge bg-danger">Sakit</span></td><td>Sakit kepala, disarankan istirahat</td><td>-</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td><td><span class="badge bg-primary text-white">Disetujui</span></td></tr>
+              <tr><td>06-11-2025</td><td>06-11-2025</td><td>Kamis</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>Macet di jalan utama</td><td>08:18</td><td><img src="https://images.unsplash.com/photo-1619715052527-d95e8df9ce16?w=80" class="rounded shadow-sm" width="60"></td><td><span class="badge bg-primary text-white">Disetujui</span></td></tr>
+              <tr><td>07-11-2025</td><td>07-11-2025</td><td>Sabtu</td><td><span class="badge bg-danger">Sakit</span></td><td>Migrain berat</td><td>-</td><td><img src="https://images.unsplash.com/photo-1599940839155-0e8ebdb90c2d?w=80" class="rounded shadow-sm" width="60"></td><td><span class="badge bg-primary text-white">Disetujui</span></td></tr>
+              <tr><td>08-11-2025</td><td>08-11-2025</td><td>Senin</td><td><span class="badge bg-warning text-dark">Terlambat</span></td><td>Motor mogok di perjalanan</td><td>08:22</td><td><img src="https://images.unsplash.com/photo-1614200179955-9187b7b27d45?w=80" class="rounded shadow-sm" width="60"></td><td><span class="badge bg-primary text-white">Disetujui</span></td></tr>
+              <tr><td>09-11-2025</td><td>11-11-2025</td><td>Kamis</td><td><span class="badge bg-danger">Sakit</span></td><td>Asam lambung kambuh</td><td>-</td><td><img src="https://images.unsplash.com/photo-1615473510377-8b7b4f0c4e6e?w=80" class="rounded shadow-sm" width="60"></td><td><span class="badge bg-primary text-white">Disetujui</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+  <!-- Generate Laporan -->
+  <!--<div class="section mt-4 mb-5 px-3">
+    <div class="card rounded-4 border-0 shadow-sm">
+      <div class="card-body">
+        <h5 class="fw-bold text-primary mb-3">
+          <ion-icon name="document-text-outline" class="me-1"></ion-icon> Generate Data Izin
+        </h5>
+        <form class="row g-3 align-items-end">
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Pilih Bulan</label>
+            <input type="month" class="form-control rounded-pill px-3">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label fw-semibold">Tampilkan Data</label>
+            <select class="form-select rounded-pill px-3" id="selectData">
+              <option selected disabled>Pilih Jenis Data</option>
+              <option value="terlambat">Izin Terlambat</option>
+              <option value="sakit">Izin Sakit</option>
+            </select>
+          </div>
+          <div class="col-12 text-center">
+            <button type="button" class="btn btn-primary rounded-pill px-4" id="btnGenerate">
+              <ion-icon name="download-outline" class="me-1"></ion-icon> Generate Laporan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>-->
+
+  <!-- Hasil Generate -->
+  <!--<div id="resultSection" class="section mt-3 px-3" style="display:none;">
+    <div class="card rounded-4 border-0 shadow-sm">
+      <div class="card-body" id="resultContent"></div>
+    </div>
+  </div>
+
+</div>-->
+
+<!-- ==================== MODAL FORM IZIN (UPDATED) ==================== -->
+<div class="modal fade" id="modalFormIzin" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow-lg border-0">
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">
+          <ion-icon name="document-text-outline" class="me-2 text-primary"></ion-icon>
+          Form Pengajuan Izin
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        <form id="formIzin" enctype="multipart/form-data">
+          <!-- Jenis Izin -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="clipboard-outline" class="me-1 text-secondary"></ion-icon> Jenis Izin
+            </label>
+            <select id="jenisIzin" class="form-select rounded-pill px-3" required>
+              <option selected disabled>Pilih jenis izin</option>
+              <option value="terlambat">Izin Terlambat</option>
+              <option value="keluarga">Izin Keperluan Keluarga</option>
+              <option value="sakit">Izin Sakit</option>
+            </select>
+          </div>
+
+          <!-- Jam Izin (jika relevan) -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="time-outline" class="me-1 text-secondary"></ion-icon> Jam Izin
+            </label>
+            <input type="time" id="jamIzin" class="form-control rounded-pill px-3" required>
+          </div>
+
+          <!-- Tanggal Dari -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="calendar-outline" class="me-1 text-secondary"></ion-icon> Tanggal Mulai Izin
+            </label>
+            <input type="date" id="tglMulai" class="form-control rounded-pill px-3" required>
+          </div>
+
+          <!-- Tanggal Sampai -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="calendar-number-outline" class="me-1 text-secondary"></ion-icon> Tanggal Selesai Izin
+            </label>
+            <input type="date" id="tglSelesai" class="form-control rounded-pill px-3" required>
+          </div>
+
+          <!-- Alasan -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="create-outline" class="me-1 text-secondary"></ion-icon> Alasan Izin
+            </label>
+            <textarea id="alasanIzin" class="form-control rounded-4 p-3" placeholder="Tuliskan alasan izin..." rows="4" required></textarea>
+          </div>
+
+          <!-- Upload Bukti -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="image-outline" class="me-1 text-secondary"></ion-icon> Upload Bukti (opsional)
+            </label>
+            <input type="file" id="buktiIzin" class="form-control rounded-pill px-3" accept="image/*,application/pdf">
+            <small class="text-muted">Contoh: surat dokter, foto kondisi, dsb</small>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer border-0 d-flex justify-content-end">
+        <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+          <ion-icon name="close-outline" class="me-1"></ion-icon> Batal
+        </button>
+        <button class="btn btn-primary rounded-pill px-4" id="btnKirimIzin">
+          <ion-icon name="send-outline" class="me-1"></ion-icon> Kirim Izin
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/navbar') %>
+<%- include('partials/footer') %>
+
+<!-- ==================== SCRIPT FORM IZIN ==================== -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("btnKirimIzin").addEventListener("click", function () {
+    const jenis = document.getElementById("jenisIzin").value;
+    const jam = document.getElementById("jamIzin").value;
+    const tglMulai = document.getElementById("tglMulai").value;
+    const tglSelesai = document.getElementById("tglSelesai").value;
+    const alasan = document.getElementById("alasanIzin").value;
+    const bukti = document.getElementById("buktiIzin").files[0];
+
+    if (!jenis || !jam || !tglMulai || !tglSelesai || !alasan) {
+      alert("Mohon lengkapi semua data izin terlebih dahulu.");
+      return;
+    }
+
+    // Sementara tampilkan di console
+    console.log("Data Izin:", { jenis, jam, tglMulai, tglSelesai, alasan, bukti });
+    alert("Pengajuan izin berhasil dikirim!");
+
+    // Reset form setelah kirim
+    document.getElementById("formIzin").reset();
+    const modal = bootstrap.Modal.getInstance(document.getElementById("modalFormIzin"));
+    modal.hide();
+  });
+});
+</script>

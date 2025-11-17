@@ -1,0 +1,185 @@
+<%- include('partials/header') %>
+
+<!-- App Header -->
+<div class="appHeader bg-primary scrolled mb-3">
+  <div class="left">
+    <a href="#" class="headerButton" data-bs-toggle="offcanvas" data-bs-target="#sidebarPanel">
+      <ion-icon name="menu-outline"></ion-icon>
+    </a>
+  </div>
+  <div class="pageTitle">Agenda Kunjungan Marketing</div>
+  <div class="right me-2 fw-bold text-light" id="liveClock"></div>
+</div>
+
+<!-- Konten Halaman -->
+<div class="container mt-3">
+
+  <!-- Card Ringkasan Agenda -->
+  <div class="row g-3">
+  <!-- Tombol Kunjungan Marketing -->
+  <div class="row g-3 mb-3">
+    <div class="col-12">
+      <div class="fw-bold text-success mb-1">Agenda Kunjungan</div>
+      <button type="button" class="btn btn-outline-secondary w-100 p-3 rounded-4 shadow-sm d-flex align-items-center"
+              data-bs-toggle="modal" data-bs-target="#modalAgendaKunjungan">
+        <ion-icon name="calendar-outline" size="large" class="text-success me-3"></ion-icon>
+        <div class="text-start">
+          <small class="text-muted">Klik untuk memasukkan agenda kunjungan marketing</small>
+        </div>
+      </button>
+    </div>
+  </div>
+    <div class="col-12" style="margin-top: -0.5em;">
+      <div class="card shadow-sm rounded-4 border-0">
+        <div class="card-body">
+          <!-- ================== TABLE ================== -->
+                <div id="printArea" class="table-responsive">
+                  <table id="agendaTable" class="table table-hover text-center mb-0">
+                    <thead class="table-light">
+                      <tr>
+                        <th>No</th>
+                        <th>Nama Instansi</th>
+                        <th>Tujuan Kunjungan</th>
+                        <th>Tanggal Kunjungan</th>
+                        <th>Jam kunjungan</th>
+                        <th>Penanggung Jawab</th>
+                      </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                      <tr>
+                        <td>1</td>
+                        <td>Dinas Lingkungan Hidup Tanggerang Selatan</td>
+                        <td><span class="badge bg-primary">Kunjungan Dinas</span></td>
+                        <td>04-11-2025</td>
+                        <td>08:00</td>
+                        <td>Hermawan, S.T</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal Form Agenda Kunjungan Marketing -->
+<div class="modal fade" id="modalAgendaKunjungan" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-4 shadow-lg border-0">
+
+      <!-- Header -->
+      <div class="modal-header border-0">
+        <h5 class="modal-title fw-bold">
+          <ion-icon name="document-text-outline" class="me-2 text-primary"></ion-icon>
+          Form Agenda Kunjungan Marketing
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+        <form enctype="multipart/form-data">
+          <!-- Instansi -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="business-outline" class="me-1 text-secondary"></ion-icon> Nama Instansi
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-0 rounded-start-pill">
+                <ion-icon name="business"></ion-icon>
+              </span>
+              <input type="text" class="form-control rounded-pill px-4"
+                     placeholder="Masukkan Nama Instansi/Perusahaan">
+            </div>
+          </div>
+
+          <!-- Tujuan Kunjungan -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="megaphone-outline" class="me-1 text-secondary"></ion-icon> Tujuan Kunjungan
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-0 rounded-start-pill">
+                <ion-icon name="chatbox"></ion-icon>
+              </span>
+              <input type="text" class="form-control rounded-pill px-4"
+                     placeholder="Masukkan Tujuan Kunjungan">
+            </div>
+          </div>
+
+          <!-- Tanggal -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="calendar-outline" class="me-1 text-secondary"></ion-icon> Tanggal Kunjungan
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-0 rounded-start-pill">
+                <ion-icon name="calendar"></ion-icon>
+              </span>
+              <input type="date" class="form-control rounded-pill px-4">
+            </div>
+          </div>
+
+          <!-- Jam -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="time-outline" class="me-1 text-secondary"></ion-icon> Jam Kunjungan
+            </label>
+            <div class="input-group">
+              <span class="input-group-text bg-light border-0 rounded-start-pill">
+                <ion-icon name="time"></ion-icon>
+              </span>
+              <input type="time" class="form-control rounded-pill px-4"
+                     value="08:00">
+            </div>
+          </div>
+
+          <!-- Catatan -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="create-outline" class="me-1 text-secondary"></ion-icon> Catatan
+            </label>
+            <textarea class="form-control" placeholder="Masukkan catatan tambahan (opsional)" rows="4"></textarea>
+          </div>
+
+          <!-- Upload Foto -->
+          <div class="mb-3">
+            <label class="form-label fw-semibold">
+              <ion-icon name="image-outline" class="me-1 text-secondary"></ion-icon> Upload Foto
+            </label>
+            <input type="file" class="form-control rounded-pill px-4" accept="image/*">
+          </div>
+
+        </form>
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer border-0 d-flex">
+        <button class="btn btn-primary rounded-pill px-4">
+          <ion-icon name="save-outline" class="me-1"></ion-icon> Simpan
+        </button>
+        <button class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">
+          <ion-icon name="close-outline" class="me-1"></ion-icon> Batal
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script Live Clock -->
+<script>
+  function updateClock() {
+    const now = new Date();
+    const jam = String(now.getHours()).padStart(2, '0');
+    const menit = String(now.getMinutes()).padStart(2, '0');
+    const detik = String(now.getSeconds()).padStart(2, '0');
+    document.getElementById('liveClock').textContent = `${jam}:${menit}:${detik}`;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+</script>
+
+<%- include('partials/navbar') %>
+<%- include('partials/footer') %>

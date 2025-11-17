@@ -1,0 +1,120 @@
+<%- include('partials/header') %>
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <%- include('partials/navbar') %>
+
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row mb-4">
+            <div class="col-12">
+              <h4 class="fw-bold text-dark">Dashboard Admin HRD</h4>
+              <p class="text-muted">22 Juli 2025</p>
+            </div>
+          </div>
+
+          <!-- Row 1 -->
+          <div class="row g-3">
+            <!-- Data Karyawan -->
+            <div class="col-sm-12 col-md-6 col-lg-6">
+            <a href="/admin_Hrd/data_karyawan" class="text-decoration-none">
+              <div class="card shadow border-start-primary border-4 h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="fw-semibold text-primary">
+                      <i class="bi bi-people-fill me-2"></i>Data Karyawan
+                    </h6>
+                    <p class="text-muted mb-1 small">Total aktif</p>
+                    <h5 class="fw-bold text-dark">138 Orang</h5>
+                  </div>
+                  <i class="bi bi-person-badge-fill text-primary fs-1"></i>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Absensi Hari Ini -->
+          <div class="col-sm-12 col-md-6 col-lg-6">
+            <a href="/admin_Hrd/absensi" class="text-decoration-none">
+              <div class="card shadow border-start-success border-4 h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="fw-semibold text-success">
+                      <i class="bi bi-calendar-check-fill me-2"></i>Absensi Hari Ini
+                    </h6>
+                    <p class="text-muted mb-1 small">Sudah absen</p>
+                    <h5 class="fw-bold text-dark">134 Orang</h5>
+                  </div>
+                  <i class="bi bi-check2-circle text-success fs-1"></i>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Lembur & Izin -->
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <a href="/admin_Hrd/lembur_izin" class="text-decoration-none">
+              <div class="card shadow border-start-warning border-4 h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="fw-semibold text-warning">
+                      <i class="bi bi-clock-history me-2"></i>Lembur & Izin
+                    </h6>
+                    <p class="text-muted mb-1 small">Hari ini</p>
+                    <h5 class="fw-bold text-dark">Cuti: 4 | Lembur: 12</h5>
+                  </div>
+                  <i class="bi bi-hourglass-split text-warning fs-1"></i>
+                </div>
+              </div>
+            </a>
+          </div>
+
+         <!-- Slip Gaji -->
+          <!-- <div class="col-sm-12 col-md-6">
+            <a href="/admin_Hrd/slip_gaji" class="text-decoration-none">
+              <div class="card shadow border-start-info border-4 h-100">
+                <div class="card-body d-flex align-items-center justify-content-between">
+                  <div>
+                    <h6 class="fw-semibold text-info">
+                      <i class="bi bi-file-earmark-text-fill me-2"></i>Slip Gaji
+                    </h6>
+                    <p class="text-muted mb-1 small">Bulan ini</p>
+                    <h5 class="fw-bold text-dark">152 Slip</h5>
+                  </div>
+                  <i class="bi bi-cash-coin text-info fs-1"></i>
+                </div>
+              </div>
+            </a>
+          </div> -->
+
+          <!-- Rekrutmen -->
+          <!--<div class="col-sm-12 col-md-6">
+            <div class="card shadow border-start-danger border-4 h-100">
+              <div class="card-body d-flex align-items-center justify-content-between">
+                <div>
+                  <h6 class="fw-semibold text-danger"><i class="bi bi-person-plus-fill me-2"></i>Rekrutmen</h6>
+                  <p class="text-muted mb-1 small">Pelamar bulan ini</p>
+                  <h5 class="fw-bold text-dark">28 Pelamar</h5>
+                </div>
+                <i class="bi bi-clipboard-data-fill text-danger fs-1"></i>
+              </div>
+            </div>
+          </div>
+          </div>-->
+
+          <!-- Laporan Grafik -->
+          <div class="row mt-4">
+            <div class="col-12">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h6 class="card-title fw-semibold"><i class="bi bi-bar-chart-fill me-2 text-secondary"></i>Laporan HRD Bulanan</h6>
+                  <p class="text-muted mb-3">Grafik ringkasan aktivitas karyawan</p>
+                  <canvas id="hrdReportChart" height="100"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+<%- include('partials/footer') %>

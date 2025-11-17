@@ -1,0 +1,581 @@
+<%- include('partials/header') %>
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <%- include('partials/navbar') %>
+
+      <!-- Main Panel -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="container-fluid">
+              <!-- Title -->
+              <div class="card shadow-sm mb-4">
+                <div class="card-body bg-white">
+                  <div class="row align-items-start mb-3 g-3">
+                    <div class="col-lg-12 col-md-12">
+                      <h3 class="mb-2">
+                        <i class="bi bi-calendar-check me-2"></i> Absensi Karyawan
+                      </h3>
+                      <p class="text-muted mb-2">Laporan Absensi Seluruh Karyawan</p>
+                      <hr>
+                     <div class="row mb-3">
+                        <div class="col-12">
+                          <div class="d-flex flex-wrap gap-2 justify-content-end">
+                            
+                           <!-- Tombol Download Excel -->
+                           <div class="d-flex justify-content-end mb-3">
+                             <button id="downloadExcel" class="btn btn-dark rounded-pill px-4" style="background-color:  #3c3c51">
+                              <i class="bi bi-file-earmark-excel me-2"></i> Download Laporan Excel (Harian)
+                             </button>
+                           </div>
+
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Kartu Ringkasan Absensi -->
+                      <div class="row row-cols-2 row-cols-md-4 g-3 mb-4">
+                        <div class="col">
+                          <div class="card shadow-sm border-start border-4 rounded-2 border-primary h-100" style="color: #0d6efd;">
+                            <div class="card-body py-3 px-4 d-flex justify-content-between align-items-center">
+                              <div>
+                                <div class="text-muted small">Total Hadir</div>
+                                <div class="fw-bold fs-5" style="color: #0d6efd;">30</div>
+                              </div>
+                              <i class="bi bi-person-check-fill text-default fs-3" style="color: #0d6efd;"></i>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col">
+                          <div class="card border-start rounded-2 border-4 border-success h-100 bg-success" role="button" data-bs-toggle="modal" data-bs-target="#modalTotalIzin">
+                            <div class="card-body py-3 px-4 d-flex justify-content-between align-items-center">
+                              <div>     
+                                <div class="small text-white ">Total Izin</div>
+                                <div class="fw-bold text-white fs-5">0</div>
+                              </div>
+                              <i class="bi bi-person-exclamation text-white fs-3"></i>
+                            </div>
+                          </div>
+
+                          <!-- Modal Izin Start -->
+                          <div class="modal fade" id="modalTotalIzin" tabindex="-1" aria-labelledby="modalTotalIzinLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header bg-success text-white">
+                                <h5 class="modal-title" id="modalTotaliIzinLabel">Detail Total Izin</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                            <div class="modal-body">
+                              <p class="mb-3">Daftar Karyawan yang <strong>Izin</strong>:</p>
+
+                              <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                  <span>Jumlah total:</span>
+                                  <span class="fw-bold text-success">0</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                  <span>Status:</span>
+                                  <span class="text-success">-</span>
+                                </div>
+                              </div>
+
+                              <hr>
+
+                              <p class="fw-semibold mb-2">Daftar Nama:</p>
+                              <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  -
+                                  <span class="badge bg-success rounded-pill">Tidak Ada Izin</span>
+                                </li>
+                              </ul>
+                            </div>
+
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Tutup</button>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                          <!-- Modal Izin End -->
+
+                        </div>
+
+                        <div class="col">
+                          <div class="card border-start rounded-2 border-4 border-white h-100 bg-warning" role="button" data-bs-toggle="modal" data-bs-target="#modalTotalSakit">
+                            <div class="card-body py-3 px-4 d-flex justify-content-between align-items-center">
+                              <div>
+                                <div class="small text-white">Total Sakit</div>
+                                <div class="fw-bold text-white fs-5">1</div>
+                              </div>
+                              <i class="bi bi-emoji-frown text-white fs-3"></i>
+                            </div>
+                          </div>
+
+                          <!-- Modal Sakit Start -->
+                          <div class="modal fade" id="modalTotalSakit" tabindex="-1" aria-labelledby="modalTotalSakitLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header bg-warning text-white">
+                                <h5 class="modal-title" id="modalTotalSakitLabel">Detail Total Sakit</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                            <div class="modal-body">
+                              <p class="mb-3">Daftar Karyawan yang <strong>Sakit</strong>:</p>
+
+                              <div class="mb-3">
+                                <div class="d-flex justify-content-between">
+                                  <span>Jumlah total:</span>
+                                  <span class="fw-bold text-warning">1</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                  <span>Status:</span>
+                                  <span class="text-danger">Demam</span>
+                                </div>
+                              </div>
+
+                              <hr>
+
+                              <p class="fw-semibold mb-2">Daftar Nama:</p>
+                              <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                  Widia Larasati
+                                  <span class="badge bg-warning rounded-pill">Sakit</span>
+                                </li>
+                              </ul>
+                            </div>
+
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal">Tutup</button>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                        <!-- Modal Sakit End -->
+
+                        <div class="col">
+                          <div class="card border-start rounded-2 border-4 border-white h-100 bg-danger" role="button" data-bs-toggle="modal" data-bs-target="#modalTotalAlpha">
+                            <div class="card-body py-3 px-4 d-flex justify-content-between align-items-center">
+                              <div>
+                                <div class="small text-white">Total Alpha</div>
+                                <div class="fw-bold text-white fs-5">3</div>
+                              </div>
+                              <i class="bi bi-person-x-fill text-white fs-3"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Modal Alpha Start -->
+                      <div class="modal fade" id="modalTotalAlpha" tabindex="-1" aria-labelledby="modalTotalAlphaLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header bg-danger text-white">
+                            <h5 class="modal-title" id="modalTotalAlphaLabel">Detail Total Alpha</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        <div class="modal-body">
+                          <p class="mb-3">Daftar Karyawan yang <strong>Alpha</strong>:</p>
+
+                          <div class="mb-3">
+                            <div class="d-flex justify-content-between">
+                              <span>Jumlah total:</span>
+                              <span class="fw-bold text-danger">3</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                              <span>Status:</span>
+                              <span class="text-danger">Tidak ada keterangan</span>
+                            </div>
+                          </div>
+
+                          <hr>
+
+                          <p class="fw-semibold mb-2">Daftar Nama:</p>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Aman Sejahtera
+                              <span class="badge bg-danger rounded-pill">Alpha</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Irfan Dwi
+                              <span class="badge bg-danger rounded-pill">Alpha</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Tantri Sandilah
+                              <span class="badge bg-danger rounded-pill">Alpha</span>
+                            </li>
+                          </ul>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Tutup</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Modal Alpha End -->
+                    
+                    <!-- Fitur Filter di Atas Tabel -->
+                    <div class="row mb-4">
+                      <div class="col-12 d-flex flex-wrap align-items-end justify-content-between gap-3">
+
+                        <!-- Dari Tanggal -->
+                        <div class="form-group" style="flex: 1 1 150px; min-width: 160px;">
+                          <label for="dariTanggal" class="form-label mb-1">Dari Tanggal</label>
+                          <input 
+                            type="date" 
+                            class="form-control py-2" 
+                            id="dariTanggal" 
+                            name="dari_tanggal" 
+                            style="min-height: 38px;">
+                        </div>
+
+                        <!-- Sampai Tanggal -->
+                        <div class="form-group" style="flex: 1 1 150px; min-width: 160px;">
+                          <label for="sampaiTanggal" class="form-label mb-1">Sampai Tanggal</label>
+                          <input 
+                            type="date" 
+                            class="form-control py-2" 
+                            id="sampaiTanggal" 
+                            name="sampai_tanggal" 
+                            style="min-height: 38px;">
+                        </div>
+
+                        <!-- Tombol Filter -->
+                        <div class="form-group d-flex align-items-end" style="flex: 0 0 auto;">
+                          <button 
+                            type="button" 
+                            class="btn btn-primary px-4 py-2" 
+                            style="min-height: 38px; background-color: #0d6efd;">
+                            <i class="bi bi-funnel me-1"></i> Filter
+                          </button>
+                        </div>
+
+                        <!-- Filter Perusahaan -->
+                        <div class="form-group" style="flex: 1 1 250px; min-width: 220px;">
+                          <label for="filterStatus" class="form-label mb-1">Perusahaan</label>
+                          <select 
+                            class="form-select py-2" 
+                            id="filterStatus" 
+                            name="perusahaan" 
+                            style="min-height: 38px;">
+                            <option value="">Semua Perusahaan</option>
+                            <option value="senang_jaya_abadi">PT. Senang Jaya Abadi</option>
+                            <option value="pemuda_sukses_abadi">PT. Pemuda Sukses Abadi</option>
+                            <option value="sukses_senang_makmur">PT. Sukses Senang Makmur</option>
+                          </select>
+                        </div>
+
+                        <!-- Pencarian Karyawan -->
+                        <div class="form-group" style="flex: 1 1 280px; min-width: 240px;">
+                          <label for="searchInput" class="form-label mb-1">Pencarian Karyawan</label>
+                          <form action="" class="w-100">
+                            <div class="input-group shadow-sm">
+                              <span class="input-group-text bg-light">
+                                <i class="bi bi-search"></i>
+                              </span>
+                              <input 
+                                type="text" 
+                                id="searchInput" 
+                                name="keyword" 
+                                class="form-control py-2" 
+                                placeholder="Cari karyawan..." 
+                                aria-label="Pencarian Karyawan"
+                                style="min-height: 38px;">
+                            
+                            </div>
+                          </form>
+                        </div>
+
+                      </div>
+                    </div>
+
+                    </div>
+                  </div>
+                  <hr>
+
+                  <!-- Table Unit Produksi -->
+                  <div class="table-responsive">
+                    <div id="areaCetak">
+                      <table class="table align-middle table-hover">
+                        <thead class="table-light text-center">
+                          <tr>
+                            <th>No</th>
+                            <th class="text-start">Nama Karyawan</th>
+                            <th>Hari</th>
+                            <th>Tanggal Kehadiran</th>
+                            <th>Awal Scan</th>
+                            <th>Akhir Scan</th>
+                            <th>Status Absen</th>
+                            <th>Jam Pulang</th>
+                            <th>Lembur</th>
+                            <th>Status Lembur</th>
+                          </tr>
+                        </thead>
+                        <tbody id="tabelData" class="text-center">
+                          <!-- Contoh data -->
+                          <tr>
+                            <td>1</td>
+                            <td class="text-start">Irfan Dwi</td>
+                            <td>Senin</td>
+                            <td>05-11-2025</td>
+                            <td>08:02</td>
+                            <td>17:10</td>
+                            <td class="status-absen">Tepat Waktu</td>
+                            <td>05-11-2025</td>
+                            <td>1:15</td>
+                            <td>Lembur</td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td class="text-start">Tantri Sandilah</td>
+                            <td>Selasa</td>
+                            <td>06-11-2025</td>
+                            <td>08:20</td>
+                            <td>17:15</td>
+                            <td class="status-absen">Terlambat</td>
+                            <td>06-11-2025</td>
+                            <td>0:45</td>
+                            <td>Lembur</td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td class="text-start">Armilda Sandraningtyas</td>
+                            <td>Rabu</td>
+                            <td>07-11-2025</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td class="status-absen">Tidak Hadir</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                          </tr>
+                        </tbody>
+                      </table>
+
+                        <!-- Pesan kalau tidak ada data -->
+                        <div id="noDataMessage" 
+                            class="alert alert-warning text-center fw-semibold mt-3 d-none mx-auto" 
+                            role="alert"
+                            style="max-width: 95%; border-radius: 12px; padding: 0.9rem 1.2rem;">
+                          <div class="d-flex flex-column flex-sm-row align-items-center justify-content-center gap-2">
+                            <i class="bi bi-exclamation-triangle fs-5"></i>
+                            <span class="small text-wrap text-break">
+                              Tidak ada data absensi atau nama tidak ditemukan.
+                            </span>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+
+         
+                  <!-- Pagination -->
+                   <nav aria-label="Navigasi halaman karyawan" class="mt-3">
+                     <ul class="pagination justify-content-end">
+                       <li class="page-item disabled">
+                         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Sebelumnya</a>
+                       </li>
+                       <li class="page-item active" aria-current="page">
+                         <a class="page-link" href="#">1</a>
+                       </li>
+                       <li class="page-item"><a class="page-link" href="#">2</a></li>
+                       <li class="page-item"><a class="page-link" href="#">3</a></li>
+                       <li class="page-item">
+                         <a class="page-link" href="#">Selanjutnya</a>
+                       </li>
+                     </ul>
+                   </nav>
+
+                  <!-- Modal Rekap Karyawan -->
+                  <div class="modal fade" id="rekapkaryawan" tabindex="-1" aria-labelledby="rekapkaryawanLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content shadow-lg rounded-2 border-0">
+                        <form>
+                          <div class="modal-header bg-default text-white rounded-top-4" style="background-color: #0d6efd; color: #ffffff;">
+                            <h5 class="modal-title" id="inputkaryawanLabel">
+                              <i class="bi bi-person-plus me-2"></i> Rekap Karyawan
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                          </div>
+
+                          <div class="modal-body row g-3 px-3">
+
+                           <!-- Nama Karyawan -->
+                          <div class="col-md-6">
+                            <label class="form-label">Nama Karyawan</label>
+                            <div class="input-group">
+                              <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                              <select class="form-select" required>
+                                <option value="" disabled selected>Pilih nama</option>
+                                <option value="Bara">Bara</option>
+                                <option value="Alessia">Alessia</option>
+                              </select>
+                            </div>
+                          </div>
+
+                            <!-- Kontak -->
+                            <div class="col-md-6">
+                              <label class="form-label">Tanggal kehadiran</label>
+                              <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-calendar-event"></i></span>
+                                <input type="date" class="form-control" placeholder="08xxxxxxxxxx" required>
+                              </div>
+                            </div>
+
+                           <!-- Jam Masuk -->
+                           <div class="col-md-6">
+                             <label class="form-label">Jam Masuk</label>
+                             <div class="input-group">
+                               <span class="input-group-text bg-light"><i class="bi bi-person-badge"></i></span>
+                               <input type="time" class="form-control">
+                             </div>
+                           </div>
+
+                           <!-- Jam Keluar -->
+                           <div class="col-md-6">
+                             <label class="form-label">Jam Keluar</label>
+                             <div class="input-group">
+                               <span class="input-group-text bg-light"><i class="bi bi-person-badge"></i></span>
+                               <input type="time" class="form-control">
+                             </div>
+                           </div> 
+
+                            <!-- Status Absensi -->
+                            <div class="col-md-6">
+                              <label class="form-label">Status Absensi</label>
+                              <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-briefcase"></i></span>
+                                <select class="form-select" id="filterStatus" required>
+                                  <option value="" disabled selected>Pilih status</option>
+                                  <option value="hadir">Hadir</option>
+                                  <option value="izin">Izin</option>
+                                  <option value="sakit">Sakit</option>
+                                  <option value="alpha">Alpha</option>
+                                </select>
+                              </div>
+                            </div>
+
+
+                            <!-- Keterangan -->
+                            <div class="col-6 mb-3">
+                              <label for="keterangan" class="form-label">Keterangan</label>
+                              <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-pencil"></i></span>
+                                <textarea 
+                                  class="form-control" 
+                                  id="keterangan" 
+                                  name="keterangan" 
+                                  placeholder="Tulis keterangan" 
+                                  rows="2"
+                                ></textarea>
+                              </div>
+                            </div>
+
+                          <div class="modal-footer px-3 pb-3">
+                            <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                              <i class="bi bi-x-circle me-1"></i> Batal
+                            </button>
+                            <button type="submit" class="btn btn-default rounded-pill px-4" style="background-color: #0d6efd; color: #ffffff;">
+                              <i class="bi bi-save me-1"></i> Simpan
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+ 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<%- include('partials/footer') %>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.19.2/dist/xlsx.full.min.js"></script>
+
+<!-- ================= JS UNTUK STATUS ABSEN ================= -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Badge warna status
+    document.querySelectorAll(".status-absen").forEach((cell) => {
+      const text = cell.textContent.trim().toLowerCase();
+      cell.innerHTML = ""; // kosongkan isi lama
+
+      const badge = document.createElement("span");
+      badge.classList.add("badge", "px-3", "py-2", "fw-semibold");
+
+      if (text === "tepat waktu") {
+        badge.style.backgroundColor = "#0d6efd"
+        badge.textContent = "Tepat Waktu";
+      } else if (text === "terlambat") {
+        badge.classList.add("bg-warning", "text-dark");
+        badge.textContent = "Terlambat";
+      } else if (text === "tidak hadir") {
+        badge.classList.add("bg-danger");
+        badge.textContent = "Tidak Hadir";
+      } else {
+        badge.classList.add("bg-secondary");
+        badge.textContent = text || "-";
+      }
+
+      cell.appendChild(badge);
+    });
+
+    // ================== FITUR PENCARIAN ==================
+    const searchInput = document.getElementById("searchInput");
+    const tableRows = document.querySelectorAll("#tabelData tr");
+    const noDataMessage = document.getElementById("noDataMessage");
+
+    searchInput.addEventListener("input", function () {
+      const keyword = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      tableRows.forEach((row) => {
+        const text = row.textContent.toLowerCase();
+        if (text.includes(keyword)) {
+          row.style.display = "";
+          visibleCount++;
+        } else {
+          row.style.display = "none";
+        }
+      });
+
+      noDataMessage.classList.toggle("d-none", visibleCount > 0);
+    });
+
+    // ================== FITUR DOWNLOAD EXCEL ==================
+    const downloadBtn = document.getElementById("downloadExcel");
+
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", () => {
+        const table = document.querySelector("#areaCetak table");
+        if (!table) {
+          alert("Tabel tidak ditemukan!");
+          return;
+        }
+
+        try {
+          const wb = XLSX.utils.book_new();
+          const ws = XLSX.utils.table_to_sheet(table, { raw: true });
+          XLSX.utils.book_append_sheet(wb, ws, "Laporan Absensi");
+
+          const today = new Date();
+          const tanggal = today.toLocaleDateString("id-ID", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          }).replace(/\//g, "-");
+
+          const fileName = `Laporan_Absensi_${tanggal}.xlsx`;
+          XLSX.writeFile(wb, fileName);
+        } catch (error) {
+          console.error("Gagal mengunduh file Excel:", error);
+          alert("Terjadi kesalahan saat membuat file Excel.");
+        }
+      });
+    }
+  });
+</script>

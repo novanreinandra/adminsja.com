@@ -1,0 +1,221 @@
+<%- include('partials/header') %>
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <%- include('partials/navbar') %>
+
+      <!-- Main Panel -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="container-fluid">
+              <!-- Title -->
+              <div class="card shadow-sm mb-4">
+                <div class="card-body bg-white">
+                  <div class="row align-items-start mb-3 g-3">
+                    <div class="col-lg-6 col-md-12">
+                      <h3 class="mb-2">
+                        <i class="bi bi-person-plus menu-icon"></i> Rekrutmen
+                      </h3>
+                      <p>Daftar pelamar kerja dan status wawancara</p>
+                      <hr>
+                    </div>
+                  </div>
+
+                  <div class="d-flex justify-content-end mb-3 gap-2">
+                      <!-- Tombol Cetak -->
+                      <a href="/admin_gudang/cetak_rekrutmen" target="_blank" 
+                        class="btn btn-success btn-sm rounded-pill px-4">
+                        <i class="bi bi-printer me-1"></i> Cetak Rekrutmen
+                      </a>
+
+                      <!-- Tombol Input Calon Karyawan 
+                        <button class="btn btn-secondary btn-sm rounded-pill px-4" style="background-color: #0d6efd; color: #ffffff; outline: none;" data-bs-toggle="modal" data-bs-target="#modalTambah">
+                          <i class="bi bi-plus-circle me-1"></i> Tambah Pelamar
+                        </button> -->
+                      </div>
+                    
+
+                    <div class="table-responsive">
+                      <div id="areaCetak">
+                          <table class="table">
+                            <thead class="table-light">
+                              <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Posisi</th>
+                                <th>Email</th>
+                                <th>No. Kontak</th>
+                                <th>Alamat</th>
+                                <th>Status</th>
+                                <th>Aksi</th>
+                              </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                              <% const pelamarDummy = [
+                                {
+                                  nama: "Armilda Sandraningtyas",
+                                  posisi: "Admin",
+                                  email: "ArmildaSandraningtyas@mail.com",
+                                  kontak: "081234567890",
+                                  alamat: "Jl. Merdeka No.1",
+                                  status: "Lolos Wawancara"
+                                },
+                                {
+                                  nama: "Dito Sebastian",
+                                  posisi: "IT Support",
+                                  email: "ditosebastian@gmail.com",
+                                  kontak: "089513962552",
+                                  alamat: "Jl. Setia Budi No. 45 Bandung",
+                                  status: "Lolos Wawancara"
+                              },
+                              {
+                                  nama: "Catur Bunga Naya",
+                                  posisi: "Customer Service",
+                                  email: "naya23@gmail.com",
+                                  alamat: "Jl. Wiratama, Cirebon",
+                                  status: "Lolos Wawancara"
+                              }
+                              ]; %>
+
+                              <% pelamarDummy.forEach((p, index) => { %>
+                                <tr>
+                                  <td><%= index + 1 %></td>
+                                  <td class="text-start"><%= p.nama %></td>
+                                  <td><%= p.posisi %></td>
+                                  <td><%= p.email %></td>
+                                  <td><%= p.kontak %></td>
+                                  <td><%= p.alamat %></td>
+                                  <td class="status-cell">
+                                    <span class="badge bg-<%= p.status === 'Lolos Wawancara' ? 'warning text-dark' : p.status === 'Diterima' ? 'success' : 'danger' %>">
+                                      <%= p.status %>
+                                    </span>
+                                  </td>
+                                  <td>
+                                    <% if(p.status === 'Lolos Wawancara') { %>
+                                      <button class="btn btn-sm btn-success me-1" onclick="terimaPelamar(this)">
+                                        <i class="bi bi-hand-thumbs-up"></i>
+                                      </button>
+                                      <button class="btn btn-sm btn-danger me-1" onclick="tolakPelamar(this)">
+                                        <i class="bi bi-hand-thumbs-down"></i>
+                                        <% } else { %>
+                                        </button>
+                                      <span class="text-muted">-</span>
+                                    <% } %>
+                                    <button class="btn btn-danger btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalHapus">
+                                      <i class="bi bi-trash"></i>
+                                    </button>
+                                  </td>
+                                </tr>
+                              <% }); %>
+                            </tbody>
+                            <div>
+                          </table>
+                      </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav aria-label="Navigasi halaman karyawan" class="mt-3">
+                      <ul class="pagination justify-content-end">
+                        <li class="page-item disabled">
+                          <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Sebelumnya</a>
+                        </li>
+                        <li class="page-item active" aria-current="page">
+                          <a class="page-link" href="#">1</a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                          <a class="page-link" href="#">Selanjutnya</a>
+                        </li>
+                      </ul>
+                    </nav>
+
+                    <!-- Modal Input Calon Karyawan -->
+                    <div class="modal fade" id="modalTambah" tabindex="-1" aria-labelledby="modalTambahLabel" aria-hidden="true" style="outline: none;">
+                      <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                          <form>
+                            <div class="modal-header" style="background-color: #0d6efd; color: #ffffff; outline: none;">
+                              <h5 class="modal-title" id="modalTambahLabel"><i class="bi bi-person-plus-fill me-2"></i>Tambah Pelamar</h5>
+                              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+
+                            <div class="modal-body px-4 py-3">
+                              <div class="row">
+                                <!-- Kolom kiri -->
+                                <div class="col-md-6">
+                                  <div class="mb-3">
+                                    <label class="form-label">Nama</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text bg-light text-primary"><i class="bi bi-person-fill"></i></span>
+                                      <input type="text" class="form-control" placeholder="Masukkan nama lengkap" required>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label">Email</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text bg-light text-primary"><i class="bi bi-envelope-fill"></i></span>
+                                      <input type="email" class="form-control" placeholder="contoh@email.com" required>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label">Alamat</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text bg-light text-primary"><i class="bi bi-geo-alt-fill"></i></span>
+                                      <textarea class="form-control" rows="2" placeholder="Alamat lengkap" required></textarea>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                <!-- Kolom kanan -->
+                                <div class="col-md-6">
+                                  <div class="mb-3">
+                                    <label class="form-label">Posisi</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text bg-light text-primary"><i class="bi bi-briefcase-fill"></i></span>
+                                      <input type="text" class="form-control" placeholder="Posisi yang dilamar" required>
+                                    </div>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label">No. Kontak</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text bg-light text-primary"><i class="bi bi-telephone-fill"></i></span>
+                                      <input type="text" class="form-control" placeholder="08xxxxxxxxxx" required>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="modal-footer px-4 pb-4">
+                              <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                              <button type="submit" class="btn btn-secondary rounded-pill px-4" style="background-color: #0d6efd; color: #ffffff; outline: none;">Simpan</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Modal Hapus -->
+                     <div class="modal fade" id="modalHapus" tabindex="-1">
+                       <div class="modal-dialog modal-dialog-centered">
+                         <div class="modal-content">
+                           <div class="modal-body text-center">
+                             <i class="bi bi-exclamation-triangle text-danger" style="font-size: 2rem;"></i>
+                             <p class="mt-2">Yakin ingin menghapus pelamar ini?</p>
+                             <div class="d-flex justify-content-center gap-2">
+                               <button class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                               <button class="btn btn-danger rounded-pill px-4">Hapus</button>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                      </div>
+                      
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+<%- include('partials/footer') %>

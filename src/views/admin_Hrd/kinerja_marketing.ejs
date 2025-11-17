@@ -1,0 +1,137 @@
+<%- include('partials/header') %>
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <%- include('partials/navbar') %>
+
+      <!-- Main Panel -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="container-fluid">
+              <!-- Title -->
+              <div class="card shadow-sm mb-4">
+                <div class="card-body bg-white">
+                  <div class="row align-items-start mb-3 g-3">
+                    <div class="col-12 col-md-6">
+                      <h3 class="mb-2">
+                        <i class="bi bi-hourglass-top menu-icon"></i> Kinerja Marketing
+                      </h3>
+                      <p class="text-muted mb-2">Laporan Kerja Mareting Secara Real-time</p>
+                      <hr>
+                      <div class="input-group col-12 col-md-6">
+                        <span class="input-group-text bg-light"><i class="bi bi-person"></i></span>
+                        <select class="form-select" id="filterStatus" required>
+                          <option value="" disabled selected>Pilih Marketing</option>
+                          <option value="">Asrul</option>
+                          <option value="">Rouf</option>
+                          <option value="">Octorianto Saputra</option>
+                        </select>
+                      </div>
+                      <hr>
+                    </div>
+                  </div>
+
+                  <div class="container">
+                    <div class="row">
+                      <!-- Card untuk Marketing Info -->
+                      <div class="col-12 col-md-4 mb-3">
+                        <div class="card">
+                          <img src="/assets/img/sample/photo/d1.jpg" width="50px" height="200px" class="card-img-top" alt="Foto">
+                          <div class="card-body">
+                            <!-- Progress Target Bulanan -->
+                            <div class="card">
+                              <div class="card-body">
+                                <div class="d-flex justify-content-between mb-1">
+                                  <span class="fw-bold">Target Bulanan</span>
+                                  <small class="text-muted">3 / 8 Unit</small>
+                                </div>
+                                <div class="progress" style="height: 15px;">
+                                  <div class="progress-bar bg-success" style="width: 30%;">30%</div>
+                                </div>
+                              </div>
+                            </div>
+                            <p class="card-text"></p>
+                          </div>
+                          <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><h4>Asrul Afif Triadi</h4></li>
+                            <li class="list-group-item">Kunjungan: <b>Dinas Lingkungan Hidup Tanggerang Selatan</b></li>
+                          </ul>
+                          <div class="card-body">
+                            <p class="card-text">Senin, 22 September 2025</p>
+                            <br><br>
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-secondary btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#lihatdetailkunjungan" title="Detail Kunjungan">
+                                <i class="bi bi-eye me-1"></i> Lihat Detail Kunjungan
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Peta Lokasi Marketing -->
+                      <div class="col-12 col-md-8">
+                        <div class="container" data-aos="fade-up" data-aos-delay="100">
+                          <div class="row gy-4">
+                            <h2>Lokasi Marketing Saat Ini</h2>
+                            <div class="col-12">
+                              <div class="card shadow border-0 rounded p-4 mb-0 d-flex flex-column justify-content-center align-items-center" data-aos="fade-up" data-aos-delay="200">
+                                <!-- Section Title -->
+                                <div class="container section-title" data-aos="fade-up">
+                                  <div style="width: 100%; height: 520px; margin-top: 8px;">
+                                 
+                                    <iframe 
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.971993440816!2d106.71130381533738!3d-6.290154995140388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3bc8c7ac9db%3A0x1f4cf4bfe4098e1c!2sDinas%20Lingkungan%20Hidup%20Tangerang%20Selatan!5e0!3m2!1sid!2sid!4v1634736884382!5m2!1sid!2sid" 
+                                        width="100%" 
+                                        height="100%" 
+                                        style="border:0;" 
+                                        allowfullscreen="" 
+                                        loading="lazy" 
+                                        referrerpolicy="no-referrer-when-downgrade">
+                                    </iframe>
+
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Modal Detail Kunjungan -->
+                      <div class="modal fade" id="lihatdetailkunjungan" tabindex="-1" aria-labelledby="modalLihatDetailKunjunganLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header bg-secondary text-dark">
+                              <h5 class="modal-title" id="modalLihatDetailKunjunganLabel">Detail Kunjungan</h5>
+                              <button type="button" class="btn-close btn-close-dark" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <p class="mb-3">Daftar Agenda Kunjungan</p>
+
+                              <div class="mb-3">
+                                 <ul class="list-group list-group-flush">
+                                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <img src="/assets/img/sample/photo/d1.jpg" width="50px" height="200px" class="card-img-top" alt="Foto">
+                                  </li>
+                                </ul>
+                              </div>
+
+                            </div>
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    </div>               
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+<%- include('partials/footer') %>

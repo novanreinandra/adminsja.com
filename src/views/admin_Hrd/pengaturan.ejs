@@ -1,0 +1,165 @@
+<%- include('partials/header') %>
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <%- include('partials/navbar') %>
+
+      <!-- Main Panel -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="container-fluid">
+              <!-- Title -->
+              <div class="card shadow-sm mb-4">
+                <div class="card-body bg-white">
+                  <div class="row align-items-start mb-3 g-3">
+                    <div class="col-lg-6 col-md-12">
+                      <h3 class="mb-2">
+                        <i class="bi bi-gear menu-icon"></i> Pengaturan
+                      </h3>
+                      <hr>
+                    </div>
+                  </div>
+
+                  <!-- Konten Tabel -->
+                  <div class="table-responsive">
+                    <div class="areaCetak">
+                      <table class="table">
+                        <thead class="table-light text-center">
+                          <tr>
+                            <th>No.</th>
+                            <th>Nama Pengguna</th>
+                            <th>NoHp</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Aksi</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                           <% const dataPengaturan = [
+                            {
+                              id_laporan: 1,
+                              nama_pengguna: 'Irfan Dwi',
+                              noHp: '+6289513962552',
+                              email: 'IrfanDwi@gmail.com',
+                              password: '*******',
+                            },
+                          ]; %>
+
+                          <% dataPengaturan.forEach((d, index) => { %>
+                          <tr>
+                             <td><%= index + 1 %></td>
+                            <td><%= d.nama_pengguna %></td>
+                            <td><%= d.noHp %></td>
+                            <td><%= d.email %></td>
+                            <td><%= d.password %></td>
+                            <td>
+                              <div class="d-flex gap-1 justify-content-center">
+                                <button class="btn btn-secondary btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modaledit" title="Edit Pengguna">
+                                  <i class="bi bi-pencil-square me-1"></i>
+                                </button>
+                                 <button class="btn btn-danger btn-sm rounded-pill px-4" data-bs-toggle="modal" data-bs-target="#modalHapus" title="Hapus Pengguna">
+                                  <i class="bi bi-trash"></i>
+                                </button>
+                              </div>
+                            </td>
+                          </tr>
+                          <% }); %>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                <!-- Modal Edit -->
+                <div class="modal fade" id="modaledit" tabindex="-1" aria-labelledby="modalEditLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                      <!-- Header -->
+                      <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title" id="modalEditLabel">
+                          <i class="bi bi-pencil-square me-2"></i> Edit Data Pengguna
+                        </h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                      </div>
+
+                      <!-- Body -->
+                      <div class="modal-body">
+                        <form id="formEditPengguna">
+                          <div class="row g-3">
+
+                            <!-- Nama -->
+                            <div class="col-md-6">
+                              <label class="form-label">Nama Pengguna</label>
+                              <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-person-fill"></i></span>
+                                <input type="text" class="form-control" name="nama_pengguna" placeholder="Masukkan nama pengguna">
+                              </div>
+                            </div>
+
+                            <!-- No HP -->
+                            <div class="col-md-6">
+                              <label class="form-label">No HP</label>
+                              <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-telephone-fill"></i></span>
+                                <input type="text" class="form-control" name="no_hp" placeholder="08xxxxxxxxxx">
+                              </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="col-md-6">
+                              <label class="form-label">Email</label>
+                              <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-envelope-fill"></i></span>
+                                <input type="email" class="form-control" name="email" placeholder="Masukkan email">
+                              </div>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="col-md-6">
+                              <label class="form-label">Password</label>
+                              <div class="input-group">
+                                <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
+                                <input type="password" class="form-control" name="password" placeholder="Masukkan password">
+                              </div>
+                            </div>
+
+                          </div>
+                        </form>
+                      </div>
+
+                      <!-- Footer -->
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">
+                          <i class="bi bi-x-circle me-1"></i> Batal
+                        </button>
+                        <button type="submit" form="formEditPengguna" class="btn btn-success rounded-pill px-4">
+                          <i class="bi bi-save me-1"></i> Simpan Perubahan
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                 <!-- Modal Hapus -->
+                 <div class="modal fade" id="modalHapus" tabindex="-1">
+                   <div class="modal-dialog modal-dialog-centered">
+                     <div class="modal-content">
+                       <div class="modal-body text-center">
+                         <i class="bi bi-exclamation-triangle text-danger" style="font-size: 2rem;"></i>
+                         <p class="mt-2">Yakin anda ingin menghapus data pengguna ini?</p>
+                         <div class="d-flex justify-content-center gap-2">
+                           <button class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal">Batal</button>
+                           <button class="btn btn-danger rounded-pill px-4">Hapus</button>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<%- include('partials/footer') %>

@@ -1,0 +1,222 @@
+<%- include('partials/header') %>
+
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <%- include('partials/navbar') %>
+
+      <!-- Main Panel -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="container-fluid">
+              <!-- Title -->
+              <div class="card shadow-sm mb-4">
+                <div class="card-body bg-white">
+                  <div class="row align-items-start mb-3 g-3">
+                    <div class="col-lg-6 col-md-12">
+                      <h3 class="mb-2">
+                       <i class="bi bi-cash-stack menu-icon"></i> Slip Gaji
+                      </h3>
+                      <hr>
+                    </div>
+                   <div class="d-flex justify-content-end mb-3 gap-2">
+                      <!-- Tombol Cetak -->
+                      <a href="/admin_gudang/cetak_slipgaji" target="_blank" 
+                        class="btn btn-success btn-sm rounded-pill px-4">
+                        <i class="bi bi-printer me-1"></i> Cetak Sli Gaji
+                      </a>
+
+                      <!-- Tombol Input Data -->
+                      <button class="btn btn-sm rounded-pill px-4" 
+                              data-bs-toggle="modal" 
+                              data-bs-target="#inputSlipModal" 
+                              style="background-color: #0d6efd; color: #ffffff;">
+                        <i class="bi bi-plus-circle me-1"></i> Input Data Gaji Bulanan
+                      </button> 
+                    </div>
+                  </div>
+
+                 <!-- ======================== SLIP GAJI (Sinkron dengan Lembur) ======================== -->
+                  <div class="table-responsive">
+                    <table class="table align-middle text-center">
+                      <thead class="table-light">
+                        <tr>
+                          <th>No</th>
+                          <th>Nama Karyawan</th>
+                          <th>Gaji Pokok</th>
+                          <th>Telat (jam/menit)</th>
+                          <th>Potongan</th>
+                          <th>Waktu Lembur (jam)</th>
+                          <th>Tambahan</th>
+                          <th>Total Gaji</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% 
+                          // Data lembur dari tabel lembur
+                          const dataLembur = [
+                            {
+                              id: 1,
+                              nama: 'Irfan Dwi',
+                              tanggal_mulai: '02-11-2025',
+                              hari: 'Minggu',
+                              jam_lembur: '08:00',
+                              jam_pulang_lembur: '15:00',
+                              potongan_hutang: '-',
+                              potongan_telat: '-',
+                              total_lembur: '8 Jam',
+                              total_hari_lembur: '1 Hari',
+                              total_bayaran: 150000,
+                              status: 'Lembur Disetujui'
+                            },
+                          ];
+
+                          // Data gaji pokok karyawan
+                          const dataGajiPokok = {
+                            'Irfan Dwi': 5000000
+                          };
+
+                          // Proses gabungan slip gaji berdasarkan data lembur
+                          const slipGajiSinkron = dataLembur.map((d, index) => {
+                            const gajiPokok = dataGajiPokok[d.nama] || 0;
+                            const potonganTelat = d.potongan_telat === '-' ? 0 : 50000;
+                            const tambahanLembur = d.status === 'Lembur Disetujui' ? d.total_bayaran : 0;
+                            const total = gajiPokok - potonganTelat + tambahanLembur;
+
+                            return {
+                              no: index + 1,
+                              nama: d.nama,
+                              gaji_pokok: gajiPokok,
+                              telat: d.potongan_telat === '-' ? '0 jam' : '1 jam',
+                              potongan: potonganTelat,
+                              waktu_lembur: d.total_lembur,
+                              tambahan: tambahanLembur,
+                              total_gaji: total
+                            };
+                          });
+                        %>
+
+                        <% slipGajiSinkron.forEach((d) => { %>
+                          <tr>
+                            <td><%= d.no %></td>
+                            <td><%= d.nama %></td>
+                            <td>Rp <%= d.gaji_pokok.toLocaleString('id-ID') %></td>
+                            <td><%= d.telat %></td>
+                            <td class="text-danger">- Rp <%= d.potongan.toLocaleString('id-ID') %></td>
+                            <td><%= d.waktu_lembur %></td>
+                            <td class="text-success">+ Rp <%= d.tambahan.toLocaleString('id-ID') %></td>
+                            <td><strong>Rp <%= d.total_gaji.toLocaleString('id-ID') %></strong></td>
+                          </tr>
+                        <% }); %>
+                      </tbody>
+                    </table>
+                  </div>
+
+
+                  <!-- Pagination -->
+                  <nav aria-label="Navigasi halaman karyawan" class="mt-3">
+                    <ul class="pagination justify-content-end">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Sebelumnya</a>
+                      </li>
+                      <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="#">1</a>
+                      </li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                      <li class="page-item">
+                        <a class="page-link" href="#">Selanjutnya</a>
+                      </li>
+                    </ul>
+                  </nav>
+
+                  <!-- Modal Input Slip Gaji Bulanan -->
+                  <div class="modal fade" id="inputSlipModal" tabindex="-1" aria-labelledby="inputSlipModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                      <div class="modal-content">
+                        <form action="/slipgaji/tambah" method="POST">
+                          <div class="modal-header" style="background-color: #0d6efd; color: #ffffff; outline: none;">
+                            <h5 class="modal-title">
+                              <i class="bi bi-pencil-square me-1"></i> Input Slip Gaji Bulanan
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row g-3">
+                              <!-- Nama -->
+                              <div class="col-md-6">
+                                <label for="namaKaryawan" class="form-label">Nama Karyawan</label>
+                                <div class="input-group">
+                                  <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                  <select class="form-select" id="namaKaryawan" name="nama" required>
+                                      <option selected disabled>-- Pilih Karyawan --</option>
+                                      <option value="Budi">
+                                          Irfan Dwi — Telat 1 kali | Potongan: Rp 25.000 | Tambahan Lembur: Rp 75.000
+                                      </option>
+                                  </select>
+                                </div>
+                              </div>
+
+                              <!-- Gaji Pokok -->
+                              <div class="col-md-6">
+                                <label class="form-label">Gaji Pokok</label>
+                                <div class="input-group">
+                                  <span class="input-group-text"><i class="bi bi-cash-coin"></i></span>
+                                  <input type="number" class="form-control" name="gaji_pokok" readonly>
+                                </div>
+                              </div>
+
+                              <!-- Telat -->
+                              <div class="col-md-6">
+                                <label class="form-label">Total Telat (Menit/Jam (Dalam satu bulan))</label>
+                                <div class="input-group">
+                                  <span class="input-group-text"><i class="bi bi-clock"></i></span>
+                                  <input type="text" class="form-control" id="telatInput"  name="telat" value="1 jam" readonly>
+                                </div>
+                              </div>
+
+                              <!-- Potongan -->
+                              <div class="col-md-6">
+                                <label class="form-label">Potongan (Rp)</label>
+                                <div class="input-group">
+                                  <span class="input-group-text"><i class="bi bi-dash-circle"></i></span>
+                                  <input type="text" class="form-control" name="potongan" required>
+                                </div>
+                              </div>
+
+                              <!-- Lembur -->
+                              <div class="col-md-6">
+                                <label class="form-label">Total Lembur (jam (Dalam satu bulan))</label>
+                                <div class="input-group">
+                                  <span class="input-group-text"><i class="bi bi-plus-circle"></i></span>
+                                  <input type="text" class="form-control" id="lemburInput" name="lembur"  value="3 jam" readonly>
+                                </div>
+                              </div>
+
+                              <!-- Tambahan -->
+                              <div class="col-md-6">
+                                <label class="form-label">Tambahan (Rp)</label>
+                                <div class="input-group">
+                                  <span class="input-group-text"><i class="bi bi-coin"></i></span>
+                                  <input type="number" class="form-control" name="tambahan" required>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="submit" class="btn btn-secondary rounded-pill px-4" style="background-color: #0d6efd; color: #ffffff; outline: none;"> 
+                              <i class="bi bi-save me-1"></i> Simpan
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<%- include('partials/footer') %>
