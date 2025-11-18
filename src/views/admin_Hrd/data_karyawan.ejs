@@ -130,7 +130,7 @@
               </div>
             </div>
 
-            <!-- ======================= MODAL DETAIL KARYAWAN ======================= -->
+            <!-- ========================== MODAL DETAIL KARYAWAN START =========================== -->
             <% if (dataKaryawan && dataKaryawan.length > 0) { %>
               <% dataKaryawan.forEach(k => { 
                   const tglMasuk = k.tgl_masuk 
@@ -246,6 +246,7 @@
                     </div>
                   </div>
                 </div>
+                <!-- ============================== MODAL DETAIL KARYAWAN END ================================== -->
 
                 <!-- ================================ MODAL HAPUS KARYAWAN START ================================ -->
                 <div class="modal fade" id="modalHapusKaryawan<%= k.id_karyawan %>" tabindex="-1" aria-hidden="true">
@@ -296,7 +297,7 @@
               <% }) %>
             <% } %>
 
-              <!-- ======================= MODAL TAMBAH KARYAWAN START ======================= -->
+              <!-- =============================== MODAL TAMBAH KARYAWAN START ================================= -->
               <div class="modal fade" id="modalTambahKaryawan" tabindex="-1" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered">
                   <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden" style="background-color: #3c3c51; color: #fff;">
