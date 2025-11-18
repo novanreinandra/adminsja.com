@@ -24,7 +24,7 @@
             <% } %>
 
             <!-- ======================================================= -->
-            <!-- BAGIAN COMPANY -->
+            <!-- COMPANY -->
             <!-- ======================================================= -->
             <div class="card shadow-sm mb-5 border-0">
               <div class="card-body bg-white">
@@ -102,7 +102,7 @@
               </div>
             </div>
 
-            <!-- ================== Modals Company (per item) ================== -->
+            <!-- ==================== MODALS COMPANY START ==================== -->
             <% if (dataCompany && dataCompany.length > 0) { %>
               <% dataCompany.forEach(d => { %>
 
@@ -138,8 +138,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- ===================== MODALS COMPANY END ====================== -->
 
-                <!-- Modal Edit Company (dark style like data_karyawan) -->
+                <!-- ================== MODALS COMPANY EDIT START ================== -->
                 <div class="modal fade" id="modalEditCompany<%= d.id_company %>" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
@@ -196,8 +197,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- ===================== MODALS COMPANY EDIT END ==================== -->
 
-                <!-- Modal Hapus Company (dark look) -->
+                <!-- =================== MODALS COMPANY HAPUS START =================== -->
                 <div class="modal fade" id="modalHapusCompany<%= d.id_company %>" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden text-center p-4" style="background-color: #2b2b35; color: #fff;">
@@ -214,11 +216,12 @@
                     </div>
                   </div>
                 </div>
+                <!-- =================== MODALS COMPANY HAPUS END =================== -->
 
               <% }) %>
             <% } %>
 
-            <!-- Modal Tambah Company (dark style) -->
+            <!-- =================== MODALS COMPANY TAMBAH START =================== -->
             <div class="modal fade" id="modalTambahCompany" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
@@ -276,10 +279,10 @@
                 </div>
               </div>
             </div>
-            <!-- END MODAL COMPANY -->
+            <!-- =================== MODALS COMPANY TAMBAH END =================== -->
 
             <!-- ======================================================= -->
-            <!-- BAGIAN DEPARTEMEN -->
+            <!-- DEPARTEMEN -->
             <!-- ======================================================= -->
             <div class="card shadow-sm mb-4 border-0">
               <div class="card-body bg-white">
@@ -351,7 +354,7 @@
               </div>
             </div>
 
-            <!-- ================== Modals Departemen (per item) ================== -->
+            <!-- ================== MODALS DEPARTMENT START ================== -->
             <% if (dataDept && dataDept.length > 0) { %>
               <% dataDept.forEach(d => { %>
 
@@ -377,7 +380,7 @@
                   </div>
                 </div>
 
-                <!-- Modal Edit Dept -->
+                <!-- =================== MODALS DEPARTMENT EDIT START =================== -->
                 <div class="modal fade" id="modalEditDept<%= d.id_department %>" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered modal-lg">
                     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
@@ -416,8 +419,9 @@
                     </div>
                   </div>
                 </div>
+                <!-- =================== MODALS DEPARTEMENT EDIT END =================== -->
 
-                <!-- Modal Hapus Dept -->
+                <!-- ================== MODALS DEPARTEMENT HAPUS START ================= -->
                 <div class="modal fade" id="modalHapusDept<%= d.id_department %>" tabindex="-1" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden text-center p-4" style="background-color: #2b2b35; color: #fff;">
@@ -433,12 +437,13 @@
                       </div>
                     </div>
                   </div>
+                  <!-- ================== MODALS DEPARTEMENT HAPUS END ================= -->
                 </div>
 
               <% }) %>
             <% } %>
 
-            <!-- Modal Tambah Departemen (dark style) -->
+            <!-- ================== MODALS DEPARTEMENT TAMBAH START ================= -->
             <div class="modal fade" id="modalTambahDept" tabindex="-1" aria-hidden="true">
               <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
@@ -474,7 +479,7 @@
                 </div>
               </div>
             </div>
-            <!-- END MODAL DEPT -->
+            <!-- ================== MODALS DEPARTEMENT TAMBAH END ================= -->
 
           </div>
         </div>
@@ -484,7 +489,6 @@
 <%- include('partials/footer') %>
 
 <script>
-  // focus first input when modal shown
   document.querySelectorAll('.modal').forEach(modalEl => {
     modalEl.addEventListener('shown.bs.modal', function () {
       const firstInput = modalEl.querySelector('input, select, textarea, button');
